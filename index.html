@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="ayu-dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,35 +34,131 @@
             sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
             mono: ['JetBrains Mono', '"SF Mono"', 'Menlo', 'Monaco', 'monospace'],
           },
-          colors: {
-            'gbg': '#0d1117',
-            'menubar': '#1e242c',
-            'gsurface': '#161b22',
-            'ghover': '#1c2128',
-            'gborder': '#30363d',
-            'gtext': '#c9d1d9',
-            'gtext2': '#8b949e',
-            'gtext3': '#484f58',
-            'gaccent': '#22c55e',
-            'gcyan': '#67e8f9',
-          },
         },
       },
     }
   </script>
   <style>
+    /* ===== CSS Custom Properties - Theme System ===== */
+
+    :root {
+      --color-bg-base: #0d1117;
+      --color-bg-surface: #161b22;
+      --color-bg-hover: #1c2128;
+      --color-bg-menubar: #1e242c;
+      --color-text-primary: #c9d1d9;
+      --color-text-secondary: #8b949e;
+      --color-text-tertiary: #484f58;
+      --color-accent: #22c55e;
+      --color-accent-secondary: #67e8f9;
+      --color-accent-glow: rgba(34,197,94,0.07);
+      --color-border: #30363d;
+      --color-success: #3fb950;
+      --color-danger: #f85149;
+      --color-traffic-red: #ff5f57;
+      --color-traffic-yellow: #ffbd2e;
+      --color-traffic-green: #27c93f;
+      --hover-scale: 1;
+    }
+
+    /* ===== THEMES ===== */
+
+    [data-theme="catppuccin-mocha"] {
+      --color-bg-base: #11111b;
+      --color-bg-surface: #1e1e2e;
+      --color-bg-hover: #252536;
+      --color-bg-menubar: #181825;
+      --color-text-primary: #cdd6f4;
+      --color-text-secondary: #a6adc8;
+      --color-text-tertiary: #6c7086;
+      --color-accent: #cba6f7;
+      --color-accent-secondary: #89b4fa;
+      --color-accent-glow: rgba(203,166,247,0.07);
+      --color-border: #313244;
+      --color-success: #a6e3a1;
+      --color-danger: #f38ba8;
+      --color-traffic-red: #f38ba8;
+      --color-traffic-yellow: #f9e2af;
+      --color-traffic-green: #a6e3a1;
+    }
+
+    [data-theme="catppuccin-macchiato"] {
+      --color-bg-base: #181926;
+      --color-bg-surface: #24273a;
+      --color-bg-hover: #2c3047;
+      --color-bg-menubar: #1e2030;
+      --color-text-primary: #cad3f5;
+      --color-text-secondary: #a5adcb;
+      --color-text-tertiary: #6e738d;
+      --color-accent: #c6a0f6;
+      --color-accent-secondary: #8aadf4;
+      --color-accent-glow: rgba(198,160,246,0.07);
+      --color-border: #363a4f;
+      --color-success: #a6da95;
+      --color-danger: #ed8796;
+      --color-traffic-red: #ed8796;
+      --color-traffic-yellow: #eed49f;
+      --color-traffic-green: #a6da95;
+    }
+
+    [data-theme="github-dark"] {
+      --color-bg-base: #0d1117;
+      --color-bg-surface: #161b22;
+      --color-bg-hover: #1c2128;
+      --color-bg-menubar: #21262d;
+      --color-text-primary: #e6edf3;
+      --color-text-secondary: #8b949e;
+      --color-text-tertiary: #484f58;
+      --color-accent: #58a6ff;
+      --color-accent-secondary: #3fb950;
+      --color-accent-glow: rgba(88,166,255,0.07);
+      --color-border: #30363d;
+      --color-success: #3fb950;
+      --color-danger: #f85149;
+      --color-traffic-red: #ff5f57;
+      --color-traffic-yellow: #ffbd2e;
+      --color-traffic-green: #27c93f;
+    }
+
+    [data-theme="tokyo-night"] {
+      --color-bg-base: #0f111a;
+      --color-bg-surface: #1a1b26;
+      --color-bg-hover: #222438;
+      --color-bg-menubar: #1a1b26;
+      --color-text-primary: #a9b1d6;
+      --color-text-secondary: #787c99;
+      --color-text-tertiary: #565f89;
+      --color-accent: #7aa2f7;
+      --color-accent-secondary: #bb9af7;
+      --color-accent-glow: rgba(122,162,247,0.07);
+      --color-border: #32344a;
+      --color-success: #9ece6a;
+      --color-danger: #f7768e;
+      --color-traffic-red: #f7768e;
+      --color-traffic-yellow: #e0af68;
+      --color-traffic-green: #9ece6a;
+    }
+
+    /* ===== Transitions ===== */
+    body, nav, footer, .macos-window, .service-card, .project-card, .case-item,
+    .case-toggle, .mobile-menu, .theme-dropdown, .menubar-inner,
+    section, .section-sep, .bg-surface, .bg-hover, .bg-menubar {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* ===== Base Styles ===== */
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0d1117;
-      color: #c9d1d9;
+      background: var(--color-bg-base);
+      color: var(--color-text-primary);
       position: relative;
       overflow-x: hidden;
     }
     .font-mono, .terminal-text { font-family: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, monospace; }
 
-    /* Background noise texture */
+    /* Background noise */
     body::before {
       content: '';
       position: fixed;
@@ -71,24 +167,24 @@
       background-repeat: repeat;
       pointer-events: none;
       z-index: 0;
+      transition: none;
     }
-    /* Subtle gradient overlay */
+    /* Gradient overlay */
     body::after {
       content: '';
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at 50% 15%, rgba(34,197,94,0.04) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 50% 15%, var(--color-accent-glow) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
+      transition: opacity 0.3s ease;
     }
 
-    /* Main content above noise */
-    main, nav, footer { position: relative; z-index: 1; }
+    main, footer { position: relative; z-index: 1; }
+    .macos-nav { position: relative; z-index: 50; }
 
     /* Terminal glow */
-    .terminal-glow-inner {
-      position: relative;
-    }
+    .terminal-glow-inner { position: relative; }
     .terminal-glow-inner::before {
       content: '';
       position: absolute;
@@ -97,16 +193,17 @@
       width: 500px;
       height: 400px;
       transform: translate(-50%, -50%);
-      background: radial-gradient(ellipse, rgba(34,197,94,0.07) 0%, transparent 70%);
+      background: radial-gradient(ellipse, var(--color-accent-glow) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
+      transition: background 0.3s ease;
     }
     .terminal-glow-inner > * { position: relative; z-index: 1; }
 
-    /* Cursor blink */
+    /* Cursor */
     .cursor-blink::after {
       content: '_';
-      color: #22c55e;
+      color: var(--color-accent);
       animation: blink 1s step-end infinite;
     }
     @keyframes blink {
@@ -118,84 +215,105 @@
     .reveal {
       opacity: 0;
       transform: translateY(24px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out, background-color 0.3s ease, border-color 0.3s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* Card hovers */
-    .service-card {
-      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
-    }
+    /* Cards */
+    .service-card { transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease; }
     .service-card:hover {
-      border-color: #22c55e !important;
+      border-color: var(--color-accent) !important;
       transform: translateY(-2px);
-      background: #1c2128;
+      background: var(--color-bg-hover);
     }
-    .project-card {
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
+    .project-card { transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease; }
     .project-card:hover {
-      border-color: #22c55e !important;
+      border-color: var(--color-accent) !important;
       transform: translateY(-2px);
     }
-    .cta-btn {
-      transition: transform 0.2s ease, filter 0.2s ease;
-    }
-    .cta-btn:hover {
-      transform: scale(1.03);
-      filter: brightness(1.15);
-    }
+    .cta-btn { transition: transform 0.2s ease, filter 0.2s ease, background-color 0.3s ease, color 0.3s ease; }
+    .cta-btn:hover { transform: scale(1.03); filter: brightness(1.15); }
 
     /* Case study accordion */
     .case-toggle { cursor: pointer; }
-    .case-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease;
-    }
-    .case-body.open {
-      max-height: 800px;
-    }
-    .case-chevron {
-      transition: transform 0.3s ease;
-    }
-    .case-chevron.open {
-      transform: rotate(180deg);
-    }
+    .case-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .case-body.open { max-height: 800px; }
+    .case-chevron { transition: transform 0.3s ease; }
+    .case-chevron.open { transform: rotate(180deg); }
 
     /* Mobile menu */
-    .mobile-menu {
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .mobile-menu.open {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    .mobile-menu.closed {
-      transform: translateX(100%);
+    .mobile-menu { transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; }
+    .mobile-menu.open { transform: translateX(0); opacity: 1; }
+    .mobile-menu.closed { transform: translateX(100%); opacity: 0; pointer-events: none; }
+
+    /* Section separator */
+    .section-sep { height: 1px; background: var(--color-border); margin: 2.5rem 0; }
+    @media (max-width: 767px) { .section-sep { margin: 2rem 0; } }
+
+    /* Traffic dots */
+    .traffic-dot { width: 12px; height: 12px; border-radius: 50%; transition: background-color 0.3s ease; }
+
+    /* Theme Dropdown */
+    .theme-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 4px;
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 4px;
+      min-width: 190px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+      backdrop-filter: blur(16px);
       opacity: 0;
-      pointer-events: none;
+      visibility: hidden;
+      transform: translateY(-4px);
+      transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s, background-color 0.3s ease, border-color 0.3s ease;
+      z-index: 100;
     }
-
-    /* Separator */
-    .section-sep {
-      height: 1px;
-      background: #30363d;
-      margin: 2.5rem 0;
+    .theme-dropdown.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
-    @media (max-width: 767px) {
-      .section-sep { margin: 2rem 0; }
+    .theme-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--color-text-primary);
+      transition: background-color 0.15s ease, color 0.15s ease;
     }
+    .theme-item:hover { background: var(--color-bg-hover); }
+    .theme-item.active { font-weight: 600; }
+    .theme-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .theme-check {
+      margin-left: auto;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+    .theme-item.active .theme-check { opacity: 1; }
+    .theme-label { flex: 1; }
 
-    /* macOS traffic light dots spacing */
-    .traffic-dot { width: 12px; height: 12px; border-radius: 50%; }
-
-    /* Typing container */
+    /* Typing */
     .typed-text { min-height: 1.8em; }
 
+    /* macOS window shadow */
+    .macos-shadow {
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 40px var(--color-accent-glow);
+      transition: box-shadow 0.3s ease;
+    }
+
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -203,46 +321,90 @@
       }
       .reveal { opacity: 1; transform: none; }
     }
+
+    /* Transition helpers */
+    .transition-theme {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
   </style>
 </head>
 <body>
 
-  <!-- ====== GLOBAL macOS MENU BAR ====== -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#1e242c]/95 backdrop-blur-md border-b border-[#30363d] h-7 select-none">
-    <div class="h-full max-w-5xl mx-auto px-4 flex items-center justify-between text-[13px]">
-      <!-- Left: Apple icon + Logo + Menus -->
+  <!-- ====== macOS MENU BAR ====== -->
+  <nav class="macos-nav fixed top-0 left-0 right-0 z-50" style="background:var(--color-bg-menubar); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--color-border); height:28px; user-select:none;">
+    <div class="menubar-inner h-full max-w-5xl mx-auto px-4 flex items-center justify-between text-[13px]">
+
+      <!-- Left -->
       <div class="flex items-center gap-0.5">
-        <!-- Apple-style terminal icon -->
-        <span class="text-gtext font-semibold mr-1.5 flex items-center">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9d1d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <span class="flex items-center mr-1.5" style="color:var(--color-text-primary);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
           </svg>
         </span>
-        <span class="text-gtext font-semibold tracking-tight mr-3">LE MINH</span>
-        <!-- Desktop menu items -->
+        <span class="font-semibold tracking-tight mr-3" style="color:var(--color-text-primary);">LE MINH</span>
         <div class="hidden md:flex items-center gap-3">
-          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">File</span>
-          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">Edit</span>
-          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">View</span>
-          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">Window</span>
-          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">Help</span>
+          <span class="transition-theme" style="color:var(--color-text-secondary);">File</span>
+          <span class="transition-theme" style="color:var(--color-text-secondary);">Edit</span>
+          <span class="transition-theme" style="color:var(--color-text-secondary);">View</span>
+          <span class="transition-theme" style="color:var(--color-text-secondary);">Window</span>
+          <span class="transition-theme" style="color:var(--color-text-secondary);">Help</span>
         </div>
       </div>
 
-      <!-- Right: Status icons + Time -->
-      <div class="flex items-center gap-3">
-        <!-- Wi-Fi icon -->
-        <svg class="text-gtext2 hidden sm:block" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.94 0"/>
-          <circle cx="12" cy="20" r="1"/></svg>
-        <!-- Battery icon -->
-        <svg class="text-gtext2 hidden sm:block" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/>
-          <line x1="7" y1="10" x2="7" y2="14"/></svg>
-        <!-- Time -->
-        <span id="menubarClock" class="text-gtext2 text-[13px] min-w-[3.5rem] text-right">00:00</span>
-        <!-- Mobile hamburger -->
-        <button id="menuBtn" class="md:hidden p-1 text-gtext2 hover:text-gaccent transition-colors" aria-label="Menu">
+      <!-- Right -->
+      <div class="flex items-center gap-2.5">
+
+        <!-- Theme Switcher Button -->
+        <div class="relative">
+          <button id="themeBtn" class="flex items-center justify-center p-0.5 rounded transition-theme" style="color:var(--color-text-secondary);" aria-label="Switch theme">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </button>
+
+          <!-- Theme Dropdown -->
+          <div id="themeDropdown" class="theme-dropdown">
+            <div class="theme-item active" data-theme-name="Ayu Dark" data-theme-value="ayu-dark">
+              <span class="theme-dot" style="background:#22c55e"></span>
+              <span class="theme-label">Ayu Dark</span>
+              <span class="theme-check" style="color:var(--color-accent);">&#10003;</span>
+            </div>
+            <div class="theme-item" data-theme-name="Catppuccin Mocha" data-theme-value="catppuccin-mocha">
+              <span class="theme-dot" style="background:#cba6f7"></span>
+              <span class="theme-label">Catppuccin Mocha</span>
+              <span class="theme-check" style="color:var(--color-accent);">&#10003;</span>
+            </div>
+            <div class="theme-item" data-theme-name="Catppuccin Macchiato" data-theme-value="catppuccin-macchiato">
+              <span class="theme-dot" style="background:#c6a0f6"></span>
+              <span class="theme-label">Catppuccin Macchiato</span>
+              <span class="theme-check" style="color:var(--color-accent);">&#10003;</span>
+            </div>
+            <div class="theme-item" data-theme-name="GitHub Dark" data-theme-value="github-dark">
+              <span class="theme-dot" style="background:#58a6ff"></span>
+              <span class="theme-label">GitHub Dark</span>
+              <span class="theme-check" style="color:var(--color-accent);">&#10003;</span>
+            </div>
+            <div class="theme-item" data-theme-name="Tokyo Night" data-theme-value="tokyo-night">
+              <span class="theme-dot" style="background:#7aa2f7"></span>
+              <span class="theme-label">Tokyo Night</span>
+              <span class="theme-check" style="color:var(--color-accent);">&#10003;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wi-Fi -->
+        <svg class="hidden sm:block transition-theme" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-text-secondary);">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.94 0"/><circle cx="12" cy="20" r="1"/>
+        </svg>
+        <!-- Battery -->
+        <svg class="hidden sm:block transition-theme" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-text-secondary);">
+          <rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><line x1="7" y1="10" x2="7" y2="14"/>
+        </svg>
+        <!-- Clock -->
+        <span id="menubarClock" class="transition-theme text-[13px] min-w-[3.5rem] text-right" style="color:var(--color-text-secondary);">00:00</span>
+        <!-- Hamburger -->
+        <button id="menuBtn" class="md:hidden p-0.5 transition-theme" style="color:var(--color-text-secondary);" aria-label="Menu">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
           </svg>
@@ -252,69 +414,74 @@
   </nav>
 
   <!-- ====== MOBILE OVERLAY MENU ====== -->
-  <div id="mobileMenu" class="mobile-menu closed fixed inset-0 z-40 bg-[#0d1117]/98 backdrop-blur-xl flex flex-col items-center justify-center gap-7 md:hidden">
-    <button id="closeMenuBtn" class="absolute top-3 right-4 p-2 text-gtext2 hover:text-gaccent" aria-label="Close">
+  <div id="mobileMenu" class="mobile-menu closed fixed inset-0 z-40 backdrop-blur-xl flex flex-col items-center justify-center gap-7 md:hidden" style="background:var(--color-bg-base);">
+    <button id="closeMenuBtn" class="absolute top-3 right-4 p-2 transition-theme" style="color:var(--color-text-secondary);" aria-label="Close">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
     </button>
-    <a href="#services" class="mobile-nav-link font-mono text-lg text-gtext2 hover:text-gaccent transition-colors">Services</a>
-    <a href="#projects" class="mobile-nav-link font-mono text-lg text-gtext2 hover:text-gaccent transition-colors">Projects</a>
-    <a href="#case-studies" class="mobile-nav-link font-mono text-lg text-gtext2 hover:text-gaccent transition-colors">Case Studies</a>
-    <a href="#contact" class="mobile-nav-link font-mono text-lg text-gtext2 hover:text-gaccent transition-colors">Contact</a>
-    <a href="#contact" class="font-mono text-sm bg-gaccent text-gbg font-bold rounded-lg px-6 py-3 cta-btn">Hire Us</a>
+    <a href="#services" class="mobile-nav-link font-mono text-lg transition-theme" style="color:var(--color-text-secondary);">Services</a>
+    <a href="#projects" class="mobile-nav-link font-mono text-lg transition-theme" style="color:var(--color-text-secondary);">Projects</a>
+    <a href="#case-studies" class="mobile-nav-link font-mono text-lg transition-theme" style="color:var(--color-text-secondary);">Case Studies</a>
+    <a href="#contact" class="mobile-nav-link font-mono text-lg transition-theme" style="color:var(--color-text-secondary);">Contact</a>
+    <a href="#contact" class="font-mono text-sm font-bold rounded-lg px-6 py-3 cta-btn" style="background:var(--color-accent); color:var(--color-bg-base);">Hire Us</a>
+    <!-- Mobile theme picker items -->
+    <div class="mt-4 pt-4 border-t transition-theme" style="border-color:var(--color-border); width:200px; text-align:center;">
+      <p class="font-mono text-xs mb-3 transition-theme" style="color:var(--color-text-tertiary);">Switch Theme</p>
+      <div class="flex flex-wrap justify-center gap-2">
+        <button class="mobile-theme-btn font-mono text-[11px] px-3 py-1.5 rounded transition-theme" data-theme-val="ayu-dark" style="border:1px solid var(--color-border); color:var(--color-text-secondary);">Ayu</button>
+        <button class="mobile-theme-btn font-mono text-[11px] px-3 py-1.5 rounded transition-theme" data-theme-val="catppuccin-mocha" style="border:1px solid var(--color-border); color:var(--color-text-secondary);">Mocha</button>
+        <button class="mobile-theme-btn font-mono text-[11px] px-3 py-1.5 rounded transition-theme" data-theme-val="catppuccin-macchiato" style="border:1px solid var(--color-border); color:var(--color-text-secondary);">Macchiato</button>
+        <button class="mobile-theme-btn font-mono text-[11px] px-3 py-1.5 rounded transition-theme" data-theme-val="github-dark" style="border:1px solid var(--color-border); color:var(--color-text-secondary);">GitHub</button>
+        <button class="mobile-theme-btn font-mono text-[11px] px-3 py-1.5 rounded transition-theme" data-theme-val="tokyo-night" style="border:1px solid var(--color-border); color:var(--color-text-secondary);">Tokyo</button>
+      </div>
+    </div>
   </div>
 
-  <!-- ====== MAIN CONTENT ====== -->
+  <!-- ====== MAIN ====== -->
   <main class="pt-12 md:pt-16 pb-10">
 
-    <!-- macOS Window Container -->
     <div class="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6">
 
-      <!-- macOS Window Frame -->
-      <div class="bg-[#161b22]/95 backdrop-blur-xl border border-[#30363d] rounded-xl md:rounded-2xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5),0_0_40px_rgba(34,197,94,0.04)] overflow-hidden">
+      <!-- macOS Window -->
+      <div class="macos-window macos-shadow rounded-xl md:rounded-2xl overflow-hidden" style="background:var(--color-bg-surface); border:1px solid var(--color-border); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);">
 
         <!-- Window Titlebar -->
-        <div class="h-9 flex items-center border-b border-[#30363d] px-4 select-none">
-          <!-- Traffic lights -->
+        <div class="h-9 flex items-center border-b px-4 select-none" style="border-color:var(--color-border);">
           <div class="flex items-center gap-[8px]">
-            <span class="traffic-dot" style="background:#ff5f57"></span>
-            <span class="traffic-dot" style="background:#ffbd2e"></span>
-            <span class="traffic-dot" style="background:#27c93f"></span>
+            <span class="traffic-dot" style="background:var(--color-traffic-red);"></span>
+            <span class="traffic-dot" style="background:var(--color-traffic-yellow);"></span>
+            <span class="traffic-dot" style="background:var(--color-traffic-green);"></span>
           </div>
-          <!-- Window title -->
           <div class="flex-1 text-center">
-            <span class="text-[13px] text-gtext2 font-semibold" style="font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-              le-minh@consulting:~
-            </span>
+            <span class="text-[13px] font-semibold transition-theme" style="font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; color:var(--color-text-secondary);">le-minh@consulting:~</span>
           </div>
-          <!-- Spacer to keep title centered -->
           <div class="w-[60px]"></div>
         </div>
 
-        <!-- Window Inner Content -->
-        <div class="px-5 sm:px-8 md:px-10 py-6 md:py-9 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+        <!-- Window Body -->
+        <div class="px-5 sm:px-8 md:px-10 py-6 md:py-9" style="box-shadow:inset 0 1px 0 rgba(255,255,255,0.02);">
 
-          <!-- Glow container for hero -->
+          <!-- Glow -->
           <div class="terminal-glow-inner">
 
             <!-- ====== HERO ====== -->
             <section id="home" class="min-h-[45vh] md:min-h-[50vh] flex flex-col justify-center">
               <div class="space-y-1 font-mono text-sm md:text-base leading-relaxed">
-                <p id="line1" class="typed-text text-gaccent font-semibold">
-                  <span class="text-gaccent font-bold">&gt;</span>
+                <p id="line1" class="typed-text font-semibold" style="color:var(--color-accent);">
+                  <span class="font-bold" style="color:var(--color-accent);">&gt;</span>
                   <span id="line1text"></span>
                 </p>
                 <p id="line2" class="typed-text">
-                  <span class="text-gaccent font-bold">&gt;</span>
-                  <span id="line2text" class="text-gtext"></span>
+                  <span class="font-bold" style="color:var(--color-accent);">&gt;</span>
+                  <span id="line2text" style="color:var(--color-text-primary);"></span>
                 </p>
-                <p id="cursorLine" class="text-gaccent hidden">
+                <p id="cursorLine" class="hidden" style="color:var(--color-accent);">
                   <span class="font-bold">&gt;</span><span class="cursor-blink">&nbsp;</span>
                 </p>
               </div>
               <div id="ctaContainer" class="mt-8 md:mt-10 opacity-0">
-                <a href="#services" class="cta-btn inline-block font-mono font-semibold text-sm bg-gaccent text-gbg rounded-lg px-6 py-3 md:px-8 md:py-3.5">
+                <a href="#services" class="cta-btn inline-block font-mono font-semibold text-sm rounded-lg px-6 py-3 md:px-8 md:py-3.5" style="background:var(--color-accent); color:var(--color-bg-base);">
                   Explore Our Services
                 </a>
               </div>
@@ -327,18 +494,14 @@
           <!-- ====== ABOUT ====== -->
           <section id="about" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-[11px] text-gtext3">$ cat about.md</span>
-              <span class="text-gtext3/50 text-xs">|</span>
-              <span class="font-mono text-[11px] text-gtext3">// About Us</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">$ cat about.md</span>
+              <span class="text-xs" style="color:var(--color-text-tertiary); opacity:0.5;">|</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">// About Us</span>
             </div>
-            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-5 tracking-tight">About</h2>
+            <h2 class="text-xl md:text-[22px] font-bold mb-5 tracking-tight" style="color:var(--color-text-primary);">About</h2>
             <div class="space-y-4 text-sm md:text-[15px] leading-relaxed max-w-3xl">
-              <p>
-                LE MINH is a registered IT service firm based in Ho Chi Minh City, providing high-end technical solutions for global clients. We bridge the gap between complex business requirements and scalable, future-proof code.
-              </p>
-              <p class="text-gtext2">
-                Our team brings deep expertise across the full software delivery lifecycle -- from initial architecture design through deployment and ongoing managed operations. We work as a true extension of your engineering team, not just an external vendor.
-              </p>
+              <p>LE MINH is a registered IT service firm based in Ho Chi Minh City, providing high-end technical solutions for global clients. We bridge the gap between complex business requirements and scalable, future-proof code.</p>
+              <p class="transition-theme" style="color:var(--color-text-secondary);">Our team brings deep expertise across the full software delivery lifecycle -- from initial architecture design through deployment and ongoing managed operations. We work as a true extension of your engineering team, not just an external vendor.</p>
             </div>
           </section>
 
@@ -347,71 +510,71 @@
           <!-- ====== SERVICES ====== -->
           <section id="services" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-[11px] text-gtext3">$ ls services/</span>
-              <span class="text-gtext3/50 text-xs">|</span>
-              <span class="font-mono text-[11px] text-gtext3">// What We Deliver</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">$ ls services/</span>
+              <span class="text-xs" style="color:var(--color-text-tertiary);opacity:0.5;">|</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">// What We Deliver</span>
             </div>
-            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-7 tracking-tight">Services</h2>
+            <h2 class="text-xl md:text-[22px] font-bold mb-7 tracking-tight" style="color:var(--color-text-primary);">Services</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
 
               <!-- S1 -->
-              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
-                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-01]</div>
-                <h3 class="font-mono font-semibold text-gaccent text-sm md:text-base mb-2">Custom Software Development</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed">Bespoke web, mobile, and enterprise applications tailored to your unique business needs.</p>
+              <div class="service-card rounded-lg p-5 cursor-default" style="border:1px solid var(--color-border);">
+                <div class="font-mono text-[11px] mb-2" style="color:var(--color-text-tertiary);">[service-01]</div>
+                <h3 class="font-mono font-semibold text-sm md:text-base mb-2" style="color:var(--color-accent);">Custom Software Development</h3>
+                <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">Bespoke web, mobile, and enterprise applications tailored to your unique business needs.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:var(--color-success);"></span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// operational</span>
                 </div>
               </div>
               <!-- S2 -->
-              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
-                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-02]</div>
-                <h3 class="font-mono font-semibold text-gcyan text-sm md:text-base mb-2">Software Architecture &amp; Consulting</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed">Expert guidance on system design, scalability, and technology strategy.</p>
+              <div class="service-card rounded-lg p-5 cursor-default" style="border:1px solid var(--color-border);">
+                <div class="font-mono text-[11px] mb-2" style="color:var(--color-text-tertiary);">[service-02]</div>
+                <h3 class="font-mono font-semibold text-sm md:text-base mb-2" style="color:var(--color-accent-secondary);">Software Architecture &amp; Consulting</h3>
+                <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">Expert guidance on system design, scalability, and technology strategy.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:var(--color-success);"></span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// operational</span>
                 </div>
               </div>
               <!-- S3 -->
-              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
-                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-03]</div>
-                <h3 class="font-mono font-semibold text-gaccent text-sm md:text-base mb-2">API Development &amp; Integration</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed">Robust, secure APIs and seamless integration between platforms and third-party services.</p>
+              <div class="service-card rounded-lg p-5 cursor-default" style="border:1px solid var(--color-border);">
+                <div class="font-mono text-[11px] mb-2" style="color:var(--color-text-tertiary);">[service-03]</div>
+                <h3 class="font-mono font-semibold text-sm md:text-base mb-2" style="color:var(--color-accent);">API Development &amp; Integration</h3>
+                <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">Robust, secure APIs and seamless integration between platforms and third-party services.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:var(--color-success);"></span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// operational</span>
                 </div>
               </div>
               <!-- S4 -->
-              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
-                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-04]</div>
-                <h3 class="font-mono font-semibold text-gcyan text-sm md:text-base mb-2">Cloud Infrastructure &amp; DevOps</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed">Cloud migration, infrastructure automation, CI/CD pipelines, and scalable deployments.</p>
+              <div class="service-card rounded-lg p-5 cursor-default" style="border:1px solid var(--color-border);">
+                <div class="font-mono text-[11px] mb-2" style="color:var(--color-text-tertiary);">[service-04]</div>
+                <h3 class="font-mono font-semibold text-sm md:text-base mb-2" style="color:var(--color-accent-secondary);">Cloud Infrastructure &amp; DevOps</h3>
+                <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">Cloud migration, infrastructure automation, CI/CD pipelines, and scalable deployments.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:var(--color-success);"></span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// operational</span>
                 </div>
               </div>
               <!-- S5 -->
-              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
-                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-05]</div>
-                <h3 class="font-mono font-semibold text-gaccent text-sm md:text-base mb-2">AI/ML Solutions &amp; Automation</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed">Intelligent features, workflow automation, and data-driven enhancements.</p>
+              <div class="service-card rounded-lg p-5 cursor-default" style="border:1px solid var(--color-border);">
+                <div class="font-mono text-[11px] mb-2" style="color:var(--color-text-tertiary);">[service-05]</div>
+                <h3 class="font-mono font-semibold text-sm md:text-base mb-2" style="color:var(--color-accent);">AI/ML Solutions &amp; Automation</h3>
+                <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">Intelligent features, workflow automation, and data-driven enhancements.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:var(--color-success);"></span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// operational</span>
                 </div>
               </div>
               <!-- S6 -->
-              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
-                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-06]</div>
-                <h3 class="font-mono font-semibold text-gcyan text-sm md:text-base mb-2">Support &amp; Maintenance</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed">Long-term managed services, security monitoring, performance optimization, and iterative improvements.</p>
+              <div class="service-card rounded-lg p-5 cursor-default" style="border:1px solid var(--color-border);">
+                <div class="font-mono text-[11px] mb-2" style="color:var(--color-text-tertiary);">[service-06]</div>
+                <h3 class="font-mono font-semibold text-sm md:text-base mb-2" style="color:var(--color-accent-secondary);">Support &amp; Maintenance</h3>
+                <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">Long-term managed services, security monitoring, performance optimization, and iterative improvements.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:var(--color-success);"></span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// operational</span>
                 </div>
               </div>
             </div>
@@ -422,59 +585,53 @@
           <!-- ====== PROJECTS ====== -->
           <section id="projects" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-[11px] text-gtext3">$ ls projects/</span>
-              <span class="text-gtext3/50 text-xs">|</span>
-              <span class="font-mono text-[11px] text-gtext3">// Recent Work</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">$ ls projects/</span>
+              <span class="text-xs" style="color:var(--color-text-tertiary);opacity:0.5;">|</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">// Recent Work</span>
             </div>
-            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-7 tracking-tight">Projects</h2>
+            <h2 class="text-xl md:text-[22px] font-bold mb-7 tracking-tight" style="color:var(--color-text-primary);">Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
 
               <!-- P1 -->
-              <div class="project-card border border-[#30363d] rounded-lg p-5 bg-gsurface">
+              <div class="project-card rounded-lg p-5" style="border:1px solid var(--color-border); background:var(--color-bg-surface);">
                 <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Fintech</span>
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">API</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Fintech</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">API</span>
                 </div>
-                <h3 class="font-mono font-semibold text-gtext text-sm mb-2">Fintech API Integration for European Startup</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed mb-3">Built a multi-provider payment API layer handling 50k+ daily transactions across 3 European banking partners.</p>
-                <a href="#" class="font-mono text-[12px] text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
-                  View details <span class="text-gaccent">-&gt;</span>
-                </a>
-                <div class="mt-3 pt-3 border-t border-[#30363d] flex justify-between items-center">
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// completed</span>
-                  <span class="font-mono text-[10px] text-gtext3">2025</span>
+                <h3 class="font-mono font-semibold text-sm mb-2" style="color:var(--color-text-primary);">Fintech API Integration for European Startup</h3>
+                <p class="text-[13px] leading-relaxed mb-3 transition-theme" style="color:var(--color-text-secondary);">Built a multi-provider payment API layer handling 50k+ daily transactions across 3 European banking partners.</p>
+                <a href="#" class="font-mono text-[12px] transition-theme inline-flex items-center gap-1" style="color:var(--color-accent-secondary);">View details <span style="color:var(--color-accent);">-&gt;</span></a>
+                <div class="mt-3 pt-3 flex justify-between items-center border-t" style="border-color:var(--color-border);">
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// completed</span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-text-tertiary);">2025</span>
                 </div>
               </div>
               <!-- P2 -->
-              <div class="project-card border border-[#30363d] rounded-lg p-5 bg-gsurface">
+              <div class="project-card rounded-lg p-5" style="border:1px solid var(--color-border); background:var(--color-bg-surface);">
                 <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Cloud</span>
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">DevOps</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Cloud</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">DevOps</span>
                 </div>
-                <h3 class="font-mono font-semibold text-gtext text-sm mb-2">Cloud Migration &amp; DevOps for E-commerce Platform</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed mb-3">Migrated 12 microservices from legacy hosting to AWS ECS with automated CI/CD, cutting deploy time by 80%.</p>
-                <a href="#" class="font-mono text-[12px] text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
-                  View details <span class="text-gaccent">-&gt;</span>
-                </a>
-                <div class="mt-3 pt-3 border-t border-[#30363d] flex justify-between items-center">
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// completed</span>
-                  <span class="font-mono text-[10px] text-gtext3">2025</span>
+                <h3 class="font-mono font-semibold text-sm mb-2" style="color:var(--color-text-primary);">Cloud Migration &amp; DevOps for E-commerce Platform</h3>
+                <p class="text-[13px] leading-relaxed mb-3 transition-theme" style="color:var(--color-text-secondary);">Migrated 12 microservices from legacy hosting to AWS ECS with automated CI/CD, cutting deploy time by 80%.</p>
+                <a href="#" class="font-mono text-[12px] transition-theme inline-flex items-center gap-1" style="color:var(--color-accent-secondary);">View details <span style="color:var(--color-accent);">-&gt;</span></a>
+                <div class="mt-3 pt-3 flex justify-between items-center border-t" style="border-color:var(--color-border);">
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// completed</span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-text-tertiary);">2025</span>
                 </div>
               </div>
               <!-- P3 -->
-              <div class="project-card border border-[#30363d] rounded-lg p-5 bg-gsurface">
+              <div class="project-card rounded-lg p-5" style="border:1px solid var(--color-border); background:var(--color-bg-surface);">
                 <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">ERP</span>
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Logistics</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">ERP</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Logistics</span>
                 </div>
-                <h3 class="font-mono font-semibold text-gtext text-sm mb-2">Custom ERP System for Logistics Provider</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed mb-3">Designed and built a full-stack ERP with inventory tracking, order management, and real-time reporting dashboards.</p>
-                <a href="#" class="font-mono text-[12px] text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
-                  View details <span class="text-gaccent">-&gt;</span>
-                </a>
-                <div class="mt-3 pt-3 border-t border-[#30363d] flex justify-between items-center">
-                  <span class="font-mono text-[10px]" style="color:#3fb950">// completed</span>
-                  <span class="font-mono text-[10px] text-gtext3">2024</span>
+                <h3 class="font-mono font-semibold text-sm mb-2" style="color:var(--color-text-primary);">Custom ERP System for Logistics Provider</h3>
+                <p class="text-[13px] leading-relaxed mb-3 transition-theme" style="color:var(--color-text-secondary);">Designed and built a full-stack ERP with inventory tracking, order management, and real-time reporting dashboards.</p>
+                <a href="#" class="font-mono text-[12px] transition-theme inline-flex items-center gap-1" style="color:var(--color-accent-secondary);">View details <span style="color:var(--color-accent);">-&gt;</span></a>
+                <div class="mt-3 pt-3 flex justify-between items-center border-t" style="border-color:var(--color-border);">
+                  <span class="font-mono text-[10px]" style="color:var(--color-success);">// completed</span>
+                  <span class="font-mono text-[10px]" style="color:var(--color-text-tertiary);">2024</span>
                 </div>
               </div>
             </div>
@@ -485,67 +642,66 @@
           <!-- ====== CASE STUDIES ====== -->
           <section id="case-studies" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-[11px] text-gtext3">$ cat case-studies/</span>
-              <span class="text-gtext3/50 text-xs">|</span>
-              <span class="font-mono text-[11px] text-gtext3">// Deep Dives</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">$ cat case-studies/</span>
+              <span class="text-xs" style="color:var(--color-text-tertiary);opacity:0.5;">|</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">// Deep Dives</span>
             </div>
-            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-7 tracking-tight">Case Studies</h2>
-
+            <h2 class="text-xl md:text-[22px] font-bold mb-7 tracking-tight" style="color:var(--color-text-primary);">Case Studies</h2>
             <div class="space-y-3 md:space-y-4">
 
               <!-- CS1 -->
-              <div class="case-item border border-[#30363d] rounded-lg overflow-hidden">
-                <div class="case-toggle flex items-center justify-between p-4 md:p-5 hover:bg-[#1c2128] transition-colors" onclick="toggleCase(1)">
+              <div class="case-item rounded-lg overflow-hidden" style="border:1px solid var(--color-border);">
+                <div class="case-toggle flex items-center justify-between p-4 md:p-5" onclick="toggleCase(1)">
                   <div class="flex items-center gap-3 flex-1 min-w-0">
-                    <span class="font-mono text-[11px] text-gtext3 flex-shrink-0">[cs-01]</span>
-                    <h3 class="font-mono font-semibold text-sm md:text-base text-gtext truncate">AI-Powered Fraud Detection System</h3>
+                    <span class="font-mono text-[11px] flex-shrink-0" style="color:var(--color-text-tertiary);">[cs-01]</span>
+                    <h3 class="font-mono font-semibold text-sm md:text-base truncate" style="color:var(--color-text-primary);">AI-Powered Fraud Detection System</h3>
                   </div>
                   <div class="flex items-center gap-3 flex-shrink-0">
-                    <span class="hidden sm:inline-block font-mono text-[10px] text-gtext3">European Fintech</span>
-                    <svg class="case-chevron w-4 h-4 text-gtext2" data-case="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <span class="hidden sm:inline-block font-mono text-[10px] transition-theme" style="color:var(--color-text-tertiary);">European Fintech</span>
+                    <svg class="case-chevron w-4 h-4 transition-theme" data-case="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-text-secondary);">
                       <polyline points="6 9 12 15 18 9"/>
                     </svg>
                   </div>
                 </div>
                 <div class="case-body" id="caseBody1">
-                  <div class="px-4 md:px-5 pb-5 md:pb-6 border-t border-[#30363d] pt-4 space-y-4">
+                  <div class="px-4 md:px-5 pb-5 md:pb-6 pt-4 space-y-4 border-t" style="border-color:var(--color-border);">
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Challenge</p>
-                      <p class="text-[13px] text-gtext2 leading-relaxed">A European fintech startup processing over 200K daily transactions needed real-time fraud detection without adding latency. Existing rule-based systems missed 30% of sophisticated fraud patterns, leading to increasing chargeback costs and customer friction.</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Challenge</p>
+                      <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">A European fintech startup processing over 200K daily transactions needed real-time fraud detection without adding latency. Existing rule-based systems missed 30% of sophisticated fraud patterns, leading to increasing chargeback costs and customer friction.</p>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Solution</p>
-                      <p class="text-[13px] text-gtext2 leading-relaxed">We designed a hybrid AI pipeline combining real-time LLM-based transaction analysis with gradient-boosted anomaly detection models. The LLM evaluates transaction context, user behavior patterns, and cross-session signals in under 50ms per request. A lightweight ensemble model handles high-throughput scoring, with escalation to the LLM only for ambiguous cases.</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Solution</p>
+                      <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">We designed a hybrid AI pipeline combining real-time LLM-based transaction analysis with gradient-boosted anomaly detection models. The LLM evaluates transaction context, user behavior patterns, and cross-session signals in under 50ms per request. A lightweight ensemble model handles high-throughput scoring, with escalation to the LLM only for ambiguous cases.</p>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Technologies</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Technologies</p>
                       <div class="flex flex-wrap gap-1.5">
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">LLM Fine-tuning</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">XGBoost</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Kafka Streams</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Redis</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">AWS Lambda</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">PostgreSQL</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">LLM Fine-tuning</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">XGBoost</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Kafka Streams</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Redis</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">AWS Lambda</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">PostgreSQL</span>
                       </div>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Results</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Results</p>
                       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">98.7%</p>
-                          <p class="text-gtext2 text-[10px]">Detection rate</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">98.7%</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Detection rate</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">52ms</p>
-                          <p class="text-gtext2 text-[10px]">Avg latency</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">52ms</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Avg latency</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">72%</p>
-                          <p class="text-gtext2 text-[10px]">Fewer false positives</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">72%</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Fewer false positives</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">&euro;2.1M</p>
-                          <p class="text-gtext2 text-[10px]">Annual savings</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">&euro;2.1M</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Annual savings</p>
                         </div>
                       </div>
                     </div>
@@ -554,58 +710,58 @@
               </div>
 
               <!-- CS2 -->
-              <div class="case-item border border-[#30363d] rounded-lg overflow-hidden">
-                <div class="case-toggle flex items-center justify-between p-4 md:p-5 hover:bg-[#1c2128] transition-colors" onclick="toggleCase(2)">
+              <div class="case-item rounded-lg overflow-hidden" style="border:1px solid var(--color-border);">
+                <div class="case-toggle flex items-center justify-between p-4 md:p-5" onclick="toggleCase(2)">
                   <div class="flex items-center gap-3 flex-1 min-w-0">
-                    <span class="font-mono text-[11px] text-gtext3 flex-shrink-0">[cs-02]</span>
-                    <h3 class="font-mono font-semibold text-sm md:text-base text-gtext truncate">Autonomous Inventory &amp; Demand Forecasting Platform</h3>
+                    <span class="font-mono text-[11px] flex-shrink-0" style="color:var(--color-text-tertiary);">[cs-02]</span>
+                    <h3 class="font-mono font-semibold text-sm md:text-base truncate" style="color:var(--color-text-primary);">Autonomous Inventory &amp; Demand Forecasting Platform</h3>
                   </div>
                   <div class="flex items-center gap-3 flex-shrink-0">
-                    <span class="hidden sm:inline-block font-mono text-[10px] text-gtext3">SEA E-commerce</span>
-                    <svg class="case-chevron w-4 h-4 text-gtext2" data-case="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <span class="hidden sm:inline-block font-mono text-[10px] transition-theme" style="color:var(--color-text-tertiary);">SEA E-commerce</span>
+                    <svg class="case-chevron w-4 h-4 transition-theme" data-case="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-text-secondary);">
                       <polyline points="6 9 12 15 18 9"/>
                     </svg>
                   </div>
                 </div>
                 <div class="case-body" id="caseBody2">
-                  <div class="px-4 md:px-5 pb-5 md:pb-6 border-t border-[#30363d] pt-4 space-y-4">
+                  <div class="px-4 md:px-5 pb-5 md:pb-6 pt-4 space-y-4 border-t" style="border-color:var(--color-border);">
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Challenge</p>
-                      <p class="text-[13px] text-gtext2 leading-relaxed">A fast-growing Southeast Asian e-commerce platform with 50K+ SKUs struggled with chronic stockouts and overstock across 12 warehouses. Manual demand forecasting was inaccurate, and seasonal spikes caused inventory imbalances that cost millions in lost revenue and storage fees.</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Challenge</p>
+                      <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">A fast-growing Southeast Asian e-commerce platform with 50K+ SKUs struggled with chronic stockouts and overstock across 12 warehouses. Manual demand forecasting was inaccurate, and seasonal spikes caused inventory imbalances that cost millions in lost revenue and storage fees.</p>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Solution</p>
-                      <p class="text-[13px] text-gtext2 leading-relaxed">We deployed a computer vision system that continuously monitors warehouse shelf levels via existing CCTV feeds, combined with a transformer-based demand forecasting model trained on 3 years of sales data, weather patterns, and local event calendars. The system autonomously generates replenishment orders and allocates stock across warehouses based on predicted regional demand.</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Solution</p>
+                      <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">We deployed a computer vision system that continuously monitors warehouse shelf levels via existing CCTV feeds, combined with a transformer-based demand forecasting model trained on 3 years of sales data, weather patterns, and local event calendars. The system autonomously generates replenishment orders and allocates stock across warehouses based on predicted regional demand.</p>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Technologies</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Technologies</p>
                       <div class="flex flex-wrap gap-1.5">
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Computer Vision</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Transformers</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">YOLOv8</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">PyTorch</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Apache Spark</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">GCP Pub/Sub</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Computer Vision</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Transformers</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">YOLOv8</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">PyTorch</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Apache Spark</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">GCP Pub/Sub</span>
                       </div>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Results</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Results</p>
                       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">94%</p>
-                          <p class="text-gtext2 text-[10px]">Forecast accuracy</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">94%</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Forecast accuracy</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">67%</p>
-                          <p class="text-gtext2 text-[10px]">Stockout reduction</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">67%</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Stockout reduction</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">42%</p>
-                          <p class="text-gtext2 text-[10px]">Lower holding costs</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">42%</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Lower holding costs</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">$3.8M</p>
-                          <p class="text-gtext2 text-[10px]">Revenue recovered</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">$3.8M</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Revenue recovered</p>
                         </div>
                       </div>
                     </div>
@@ -614,58 +770,58 @@
               </div>
 
               <!-- CS3 -->
-              <div class="case-item border border-[#30363d] rounded-lg overflow-hidden">
-                <div class="case-toggle flex items-center justify-between p-4 md:p-5 hover:bg-[#1c2128] transition-colors" onclick="toggleCase(3)">
+              <div class="case-item rounded-lg overflow-hidden" style="border:1px solid var(--color-border);">
+                <div class="case-toggle flex items-center justify-between p-4 md:p-5" onclick="toggleCase(3)">
                   <div class="flex items-center gap-3 flex-1 min-w-0">
-                    <span class="font-mono text-[11px] text-gtext3 flex-shrink-0">[cs-03]</span>
-                    <h3 class="font-mono font-semibold text-sm md:text-base text-gtext truncate">Intelligent Document Processing &amp; Workflow Automation</h3>
+                    <span class="font-mono text-[11px] flex-shrink-0" style="color:var(--color-text-tertiary);">[cs-03]</span>
+                    <h3 class="font-mono font-semibold text-sm md:text-base truncate" style="color:var(--color-text-primary);">Intelligent Document Processing &amp; Workflow Automation</h3>
                   </div>
                   <div class="flex items-center gap-3 flex-shrink-0">
-                    <span class="hidden sm:inline-block font-mono text-[10px] text-gtext3">Logistics</span>
-                    <svg class="case-chevron w-4 h-4 text-gtext2" data-case="3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <span class="hidden sm:inline-block font-mono text-[10px] transition-theme" style="color:var(--color-text-tertiary);">Logistics</span>
+                    <svg class="case-chevron w-4 h-4 transition-theme" data-case="3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-text-secondary);">
                       <polyline points="6 9 12 15 18 9"/>
                     </svg>
                   </div>
                 </div>
                 <div class="case-body" id="caseBody3">
-                  <div class="px-4 md:px-5 pb-5 md:pb-6 border-t border-[#30363d] pt-4 space-y-4">
+                  <div class="px-4 md:px-5 pb-5 md:pb-6 pt-4 space-y-4 border-t" style="border-color:var(--color-border);">
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Challenge</p>
-                      <p class="text-[13px] text-gtext2 leading-relaxed">A regional logistics company processed 15,000+ shipping documents daily -- invoices, bills of lading, customs forms -- mostly as PDF scans and photos. Data entry was manual, error-prone, and required a team of 40 operators. Turnaround time averaged 4.5 hours per batch, causing shipping delays at customs.</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Challenge</p>
+                      <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">A regional logistics company processed 15,000+ shipping documents daily -- invoices, bills of lading, customs forms -- mostly as PDF scans and photos. Data entry was manual, error-prone, and required a team of 40 operators. Turnaround time averaged 4.5 hours per batch, causing shipping delays at customs.</p>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Solution</p>
-                      <p class="text-[13px] text-gtext2 leading-relaxed">We built a multimodal AI pipeline using a vision-language model for document layout understanding, a fine-tuned OCR model for multilingual text extraction, and a RAG-based validation layer that cross-references extracted data against customs databases and historical patterns. Extracted fields are automatically routed through a no-code workflow engine that triggers approvals, generates compliance reports, and submits digital filings.</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Solution</p>
+                      <p class="text-[13px] leading-relaxed transition-theme" style="color:var(--color-text-secondary);">We built a multimodal AI pipeline using a vision-language model for document layout understanding, a fine-tuned OCR model for multilingual text extraction, and a RAG-based validation layer that cross-references extracted data against customs databases and historical patterns. Extracted fields are automatically routed through a no-code workflow engine that triggers approvals, generates compliance reports, and submits digital filings.</p>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Technologies</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Technologies</p>
                       <div class="flex flex-wrap gap-1.5">
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Multimodal AI</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">RAG Pipeline</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Custom OCR</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">LangChain</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Weaviate</span>
-                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">n8n Workflows</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Multimodal AI</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">RAG Pipeline</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Custom OCR</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">LangChain</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">Weaviate</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent); color:var(--color-accent); border:1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);">n8n Workflows</span>
                       </div>
                     </div>
                     <div>
-                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Results</p>
+                      <p class="font-mono text-[10px] mb-1.5" style="color:var(--color-text-tertiary);">// Results</p>
                       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">96%</p>
-                          <p class="text-gtext2 text-[10px]">Auto-processing rate</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">96%</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Auto-processing rate</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">2.3 min</p>
-                          <p class="text-gtext2 text-[10px]">Per document</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">2.3 min</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Per document</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">40</p>
-                          <p class="text-gtext2 text-[10px]">Operators redeployed</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">40</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Operators redeployed</p>
                         </div>
-                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
-                          <p class="text-gaccent font-bold text-lg">$1.2M</p>
-                          <p class="text-gtext2 text-[10px]">Annual cost savings</p>
+                        <div class="rounded-lg p-3 text-center" style="background:var(--color-bg-base); border:1px solid var(--color-border);">
+                          <p class="font-bold text-lg" style="color:var(--color-accent);">$1.2M</p>
+                          <p class="text-[10px] transition-theme" style="color:var(--color-text-secondary);">Annual cost savings</p>
                         </div>
                       </div>
                     </div>
@@ -681,87 +837,78 @@
           <!-- ====== CONTACT ====== -->
           <section id="contact" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-[11px] text-gtext3">$ cat contact.md</span>
-              <span class="text-gtext3/50 text-xs">|</span>
-              <span class="font-mono text-[11px] text-gtext3">// Get In Touch</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">$ cat contact.md</span>
+              <span class="text-xs" style="color:var(--color-text-tertiary);opacity:0.5;">|</span>
+              <span class="font-mono text-[11px]" style="color:var(--color-text-tertiary);">// Get In Touch</span>
             </div>
-            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-7 tracking-tight">Contact</h2>
+            <h2 class="text-xl md:text-[22px] font-bold mb-7 tracking-tight" style="color:var(--color-text-primary);">Contact</h2>
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8">
 
               <!-- Details -->
               <div class="lg:col-span-3 space-y-5">
                 <!-- Address -->
                 <div class="flex items-start gap-3">
-                  <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <div class="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                     </svg>
                   </div>
                   <div>
-                    <p class="font-mono text-[11px] text-gtext2 mb-0.5">// Address</p>
-                    <p class="text-sm md:text-[15px] leading-relaxed">
-                      129/5A Hoang Van Thu, Phuong Phu Nhuan<br />Thanh pho Ho Chi Minh, Viet Nam
-                    </p>
+                    <p class="font-mono text-[11px] mb-0.5" style="color:var(--color-text-secondary);">// Address</p>
+                    <p class="text-sm md:text-[15px] leading-relaxed" style="color:var(--color-text-primary);">129/5A Hoang Van Thu, Phuong Phu Nhuan<br />Thanh pho Ho Chi Minh, Viet Nam</p>
                   </div>
                 </div>
                 <!-- Email -->
                 <div class="flex items-start gap-3">
-                  <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <div class="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                     </svg>
                   </div>
                   <div>
-                    <p class="font-mono text-[11px] text-gtext2 mb-0.5">// Email</p>
-                    <a href="mailto:leanhminh5@gmail.com" class="text-gaccent hover:text-gaccent/80 font-mono text-sm md:text-base transition-colors break-all">leanhminh5@gmail.com</a>
+                    <p class="font-mono text-[11px] mb-0.5" style="color:var(--color-text-secondary);">// Email</p>
+                    <a href="mailto:leanhminh5@gmail.com" class="font-mono text-sm md:text-base transition-colors break-all" style="color:var(--color-accent);">leanhminh5@gmail.com</a>
                   </div>
                 </div>
                 <!-- Phone -->
                 <div class="flex items-start gap-3">
-                  <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <div class="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:color-mix(in srgb, var(--color-accent) 10%, transparent);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
                   </div>
                   <div>
-                    <p class="font-mono text-[11px] text-gtext2 mb-0.5">// Phone</p>
-                    <a href="tel:+84786599687" class="text-gtext hover:text-gaccent font-mono text-sm md:text-base transition-colors">+84 786 599 687</a>
+                    <p class="font-mono text-[11px] mb-0.5" style="color:var(--color-text-secondary);">// Phone</p>
+                    <a href="tel:+847****9687" class="font-mono text-sm md:text-base transition-colors" style="color:var(--color-text-primary);">+84 786 599 687</a>
                   </div>
                 </div>
                 <div class="pt-2">
-                  <p class="font-mono text-[11px] text-gtext3"><span class="text-gaccent">//</span> We respond within 24 hours on business days</p>
+                  <p class="font-mono text-[11px]" style="color:var(--color-text-tertiary);"><span style="color:var(--color-accent);">//</span> We respond within 24 hours on business days</p>
                 </div>
               </div>
 
               <!-- CTA Callout -->
-              <div class="lg:col-span-2 bg-gaccent/[0.06] border border-dashed border-gaccent/40 rounded-xl p-5 md:p-7 flex flex-col justify-center">
-                <p class="font-mono text-[11px] text-gtext3 mb-2">[call-to-action]</p>
-                <h3 class="font-mono font-semibold text-base md:text-lg mb-2">Ready to build something?</h3>
-                <p class="text-gtext2 text-[13px] leading-relaxed mb-5">
-                  We are actively taking on new clients. Send us a message and we will get back to you within one business day.
-                </p>
-                <a href="mailto:leanhminh5@gmail.com" class="font-mono font-semibold text-sm bg-gaccent text-gbg rounded-lg px-5 py-3 cta-btn inline-block text-center">
-                  leanhminh5@gmail.com
-                </a>
-                <p class="font-mono text-[11px] text-gtext3 mt-3 text-center">
-                  or call <a href="tel:+84786599687" class="text-gaccent hover:text-gaccent/80">+84 786 599 687</a>
-                </p>
+              <div class="lg:col-span-2 rounded-xl p-5 md:p-7 flex flex-col justify-center" style="border:1px dashed color-mix(in srgb, var(--color-accent) 40%, transparent); background:color-mix(in srgb, var(--color-accent) 6%, transparent);">
+                <p class="font-mono text-[11px] mb-2" style="color:var(--color-text-tertiary);">[call-to-action]</p>
+                <h3 class="font-mono font-semibold text-base md:text-lg mb-2" style="color:var(--color-text-primary);">Ready to build something?</h3>
+                <p class="text-[13px] leading-relaxed mb-5 transition-theme" style="color:var(--color-text-secondary);">We are actively taking on new clients. Send us a message and we will get back to you within one business day.</p>
+                <a href="mailto:leanhminh5@gmail.com" class="font-mono font-semibold text-sm rounded-lg px-5 py-3 cta-btn inline-block text-center" style="background:var(--color-accent); color:var(--color-bg-base);">leanhminh5@gmail.com</a>
+                <p class="font-mono text-[11px] mt-3 text-center" style="color:var(--color-text-tertiary);">or call <a href="tel:+847****9687" style="color:var(--color-accent);">+84 786 599 687</a></p>
               </div>
 
             </div>
           </section>
 
-        </div><!-- /window inner -->
-      </div><!-- /window frame -->
+        </div><!-- /window body -->
+      </div><!-- /window -->
     </div><!-- /container -->
-
   </main>
 
   <!-- ====== FOOTER ====== -->
-  <footer class="border-t border-[#30363d] bg-[#161b22] mt-8">
+  <footer class="border-t mt-8" style="border-color:var(--color-border); background:var(--color-bg-surface);">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 text-center">
-      <p class="font-mono text-sm text-gaccent mb-2">[exit 0]</p>
-      <p class="font-mono text-[12px] text-gtext3">&copy; 2026 LE MINH. All rights reserved.</p>
+      <p class="font-mono text-sm mb-2" style="color:var(--color-accent);">[exit 0]</p>
+      <p class="font-mono text-[12px]" style="color:var(--color-text-tertiary);">&copy; 2026 LE MINH. All rights reserved.</p>
     </div>
   </footer>
 
@@ -769,7 +916,90 @@
   (function() {
     'use strict';
 
-    // --- Menu bar clock ---
+    // ===== THEME SYSTEM =====
+    var themes = [
+      { value: 'ayu-dark',            label: 'Ayu Dark' },
+      { value: 'catppuccin-mocha',     label: 'Catppuccin Mocha' },
+      { value: 'catppuccin-macchiato', label: 'Catppuccin Macchiato' },
+      { value: 'github-dark',          label: 'GitHub Dark' },
+      { value: 'tokyo-night',          label: 'Tokyo Night' },
+    ];
+
+    function setTheme(value) {
+      document.documentElement.dataset.theme = value;
+      localStorage.setItem('le-minh-theme', value);
+
+      // Update dropdown checkmarks
+      document.querySelectorAll('.theme-item').forEach(function(item) {
+        var val = item.getAttribute('data-theme-value');
+        item.classList.toggle('active', val === value);
+      });
+
+      // Update mobile buttons
+      document.querySelectorAll('.mobile-theme-btn').forEach(function(btn) {
+        var val = btn.getAttribute('data-theme-val');
+        if (val === value) {
+          btn.style.borderColor = 'var(--color-accent)';
+          btn.style.color = 'var(--color-accent)';
+        } else {
+          btn.style.borderColor = 'var(--color-border)';
+          btn.style.color = 'var(--color-text-secondary)';
+        }
+      });
+    }
+
+    // Restore saved theme
+    var savedTheme = localStorage.getItem('le-minh-theme');
+    if (savedTheme && themes.some(function(t) { return t.value === savedTheme; })) {
+      setTheme(savedTheme);
+    } else {
+      setTheme('ayu-dark');
+    }
+
+    // Theme dropdown toggle
+    var themeBtn = document.getElementById('themeBtn');
+    var themeDropdown = document.getElementById('themeDropdown');
+    var isDropdownOpen = false;
+
+    function toggleDropdown(e) {
+      e.stopPropagation();
+      isDropdownOpen = !isDropdownOpen;
+      themeDropdown.classList.toggle('open', isDropdownOpen);
+    }
+
+    function closeDropdown() {
+      isDropdownOpen = false;
+      themeDropdown.classList.remove('open');
+    }
+
+    themeBtn.addEventListener('click', toggleDropdown);
+
+    // Click theme item
+    document.querySelectorAll('.theme-item').forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var value = this.getAttribute('data-theme-value');
+        setTheme(value);
+        closeDropdown();
+      });
+    });
+
+    // Click outside to close
+    document.addEventListener('click', function(e) {
+      if (isDropdownOpen && !themeBtn.contains(e.target) && !themeDropdown.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+
+    // Mobile theme buttons
+    document.querySelectorAll('.mobile-theme-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var val = this.getAttribute('data-theme-val');
+        setTheme(val);
+      });
+    });
+
+    // ===== MENUBAR CLOCK =====
     function updateClock() {
       var now = new Date();
       var h = String(now.getHours()).padStart(2, '0');
@@ -780,14 +1010,13 @@
     updateClock();
     setInterval(updateClock, 30000);
 
-    // --- Typing effect ---
+    // ===== TYPING EFFECT =====
     var line1Text = 'Initializing LE MINH Services...';
     var line2Text = 'Specialized in Software Architecture, API Integration, and Cloud Infrastructure.';
     var line1El = document.getElementById('line1text');
     var line2El = document.getElementById('line2text');
     var cursorLine = document.getElementById('cursorLine');
     var ctaContainer = document.getElementById('ctaContainer');
-
     var idx1 = 0, idx2 = 0;
 
     function typeLine1() {
@@ -811,61 +1040,36 @@
         ctaContainer.classList.add('animate-fade-in');
       }
     }
-
     setTimeout(typeLine1, 400);
 
-    // --- Mobile menu ---
+    // ===== MOBILE MENU =====
     var menuBtn = document.getElementById('menuBtn');
     var closeMenuBtn = document.getElementById('closeMenuBtn');
     var mobileMenu = document.getElementById('mobileMenu');
     var mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-    function openMenu() {
-      mobileMenu.classList.remove('closed');
-      mobileMenu.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMenu() {
-      mobileMenu.classList.remove('open');
-      mobileMenu.classList.add('closed');
-      document.body.style.overflow = '';
-    }
-    menuBtn.addEventListener('click', openMenu);
-    closeMenuBtn.addEventListener('click', closeMenu);
-    mobileNavLinks.forEach(function(link) {
-      link.addEventListener('click', closeMenu);
-    });
+    function openMob() { mobileMenu.classList.remove('closed'); mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeMob() { mobileMenu.classList.remove('open'); mobileMenu.classList.add('closed'); document.body.style.overflow = ''; }
+    menuBtn.addEventListener('click', openMob);
+    closeMenuBtn.addEventListener('click', closeMob);
+    mobileNavLinks.forEach(function(l) { l.addEventListener('click', closeMob); });
 
-    // --- Case study accordion ---
+    // ===== CASE STUDY ACCORDION =====
     window.toggleCase = function(id) {
       var body = document.getElementById('caseBody' + id);
       var chevron = document.querySelector('.case-chevron[data-case="' + id + '"]');
       var isOpen = body.classList.contains('open');
-
-      // Close all
-      document.querySelectorAll('.case-body').forEach(function(b) {
-        b.classList.remove('open');
-      });
-      document.querySelectorAll('.case-chevron').forEach(function(c) {
-        c.classList.remove('open');
-      });
-
-      // Toggle this one
-      if (!isOpen) {
-        body.classList.add('open');
-        if (chevron) chevron.classList.add('open');
-      }
+      document.querySelectorAll('.case-body').forEach(function(b) { b.classList.remove('open'); });
+      document.querySelectorAll('.case-chevron').forEach(function(c) { c.classList.remove('open'); });
+      if (!isOpen) { body.classList.add('open'); if (chevron) chevron.classList.add('open'); }
     };
 
-    // --- Scroll reveal ---
+    // ===== SCROLL REVEAL =====
     var revealEls = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
       revealEls.forEach(function(el) { observer.observe(el); });
@@ -873,20 +1077,9 @@
       revealEls.forEach(function(el) { el.classList.add('visible'); });
     }
 
-    // --- Nav scroll spy ---
-    var sections = document.querySelectorAll('section[id]');
-    var navLinks = document.querySelectorAll('.nav-underline');
-    window.addEventListener('scroll', function() {
-      var current = '';
-      sections.forEach(function(s) {
-        if (s.getBoundingClientRect().top <= 150) current = s.getAttribute('id');
-      });
-    });
-
   })();
   </script>
 
-  <!-- Tailwind animation keyframe fix -->
   <style>
     @keyframes fadeIn {
       0% { opacity: 0; }
