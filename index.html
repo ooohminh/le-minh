@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LE MINH - Boutique IT Consultancy</title>
+  <meta name="description" content="LE MINH is a registered IT service firm based in Ho Chi Minh City, providing high-end technical solutions for global clients." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "LE MINH",
+    "description": "Boutique IT consultancy specializing in software architecture, API integration, and cloud infrastructure.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "129/5A Hoang Van Thu, Phuong Phu Nhuan",
+      "addressLocality": "Ho Chi Minh City",
+      "addressCountry": "VN"
+    },
+    "email": "leminh5@gmail.com",
+    "telephone": "+84 786 599 687",
+    "url": "https://le-minh.vercel.app"
+  }
+  </script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+          colors: {
+            'gbg': '#0d1117',
+            'gsurface': '#161b22',
+            'ghover': '#1c2128',
+            'gborder': '#30363d',
+            'gtext': '#e6edf3',
+            'gtext2': '#8b949e',
+            'gtext3': '#484f58',
+            'gaccent': '#22c55e',
+            'gcyan': '#67e8f9',
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+            'slide-up': 'slideUp 0.5s ease-out forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+    }
+    .font-mono, .nav-link, .terminal-text { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace; }
+
+    /* Cursor blink */
+    .cursor-blink::after {
+      content: '_';
+      color: #22c55e;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Terminal glow */
+    .terminal-glow {
+      position: relative;
+    }
+    .terminal-glow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(34,197,94,0.10) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Scroll animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Nav link underline */
+    .nav-underline {
+      position: relative;
+    }
+    .nav-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #22c55e;
+      transition: all 0.2s ease;
+      transform: translateX(-50%);
+    }
+    .nav-underline:hover::after,
+    .nav-underline.active::after {
+      width: 100%;
+    }
+
+    /* Card hover */
+    .service-card {
+      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+    .service-card:hover {
+      border-color: #22c55e !important;
+      transform: translateY(-2px);
+      background: #1c2128;
+    }
+
+    .project-card {
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .project-card:hover {
+      border-color: #22c55e !important;
+      transform: translateY(-2px);
+    }
+
+    /* CTA button */
+    .cta-btn {
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .cta-btn:hover {
+      transform: scale(1.03);
+      filter: brightness(1.15);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .mobile-menu.closed {
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Typing container */
+    .typed-text { min-height: 1.8em; }
+
+    /* Separator line */
+    .section-sep {
+      height: 1px;
+      background: #30363d;
+      margin: 2.5rem 0;
+    }
+
+    @media (max-width: 767px) {
+      .section-sep { margin: 2rem 0; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body class="bg-gbg min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-gsurface/95 backdrop-blur-sm border-b border-gborder">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="font-mono text-gaccent font-bold text-lg flex items-center gap-1.5">
+        <span class="text-gaccent">&gt;</span>
+        <span class="text-gtext tracking-tight">LE MINH</span>
+        <span class="text-gaccent animate-pulse" style="animation-duration: 1.5s;">_</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#services" class="nav-link nav-underline text-gtext2 hover:text-gtext font-medium text-sm transition-colors duration-200">Services</a>
+        <a href="#projects" class="nav-link nav-underline text-gtext2 hover:text-gtext font-medium text-sm transition-colors duration-200">Projects</a>
+        <a href="#contact" class="nav-link nav-underline text-gtext2 hover:text-gtext font-medium text-sm transition-colors duration-200">Contact</a>
+        <a href="#contact" class="font-mono text-xs bg-gaccent/10 text-gaccent border border-gaccent/30 rounded-md px-3 py-1.5 cta-btn font-semibold">Hire Us</a>
+      </div>
+
+      <!-- Hamburger (mobile) -->
+      <button id="menuBtn" class="md:hidden p-2 text-gtext2 hover:text-gaccent transition-colors" aria-label="Toggle menu">
+        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="6" x2="20" y2="6" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="18" x2="20" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobileMenu" class="mobile-menu closed fixed inset-0 z-40 bg-gbg/98 backdrop-blur-md flex flex-col items-center justify-center gap-8 md:hidden">
+    <button id="closeMenuBtn" class="absolute top-4 right-4 p-2 text-gtext2 hover:text-gaccent transition-colors" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <a href="#services" class="mobile-nav-link font-mono text-xl text-gtext2 hover:text-gaccent transition-colors">Services</a>
+    <a href="#projects" class="mobile-nav-link font-mono text-xl text-gtext2 hover:text-gaccent transition-colors">Projects</a>
+    <a href="#contact" class="mobile-nav-link font-mono text-xl text-gtext2 hover:text-gaccent transition-colors">Contact</a>
+    <a href="#contact" class="font-mono text-base bg-gaccent text-gbg font-bold rounded-lg px-6 py-3 cta-btn">Hire Us</a>
+  </div>
+
+  <!-- Main content -->
+  <main class="pt-14">
+
+    <!-- Terminal Window Container -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+      <!-- Terminal window -->
+      <div class="terminal-glow bg-gsurface border border-gborder rounded-xl md:rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(34,197,94,0.06)]">
+
+        <!-- Terminal title bar -->
+        <div class="flex items-center gap-2 px-4 md:px-6 h-11 border-b border-gborder">
+          <span class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full" style="background:#ff5f57"></span>
+          <span class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full" style="background:#febc2e"></span>
+          <span class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full" style="background:#28c840"></span>
+          <span class="ml-3 font-mono text-xs text-gtext3">le-minh@consulting:~$</span>
+        </div>
+
+        <!-- Terminal body -->
+        <div class="px-5 sm:px-8 md:px-12 py-6 md:py-10">
+
+          <!-- ===== HERO ===== -->
+          <section id="home" class="min-h-[50vh] md:min-h-[55vh] flex flex-col justify-center">
+            <div class="space-y-1.5 font-mono text-base md:text-xl leading-relaxed">
+              <p id="line1" class="typed-text text-gaccent font-semibold">
+                <span class="text-gaccent font-bold">&gt;</span>
+                <span id="line1text"></span>
+              </p>
+              <p id="line2" class="typed-text text-gtext">
+                <span class="text-gaccent font-bold">&gt;</span>
+                <span id="line2text"></span>
+              </p>
+              <p id="cursorLine" class="text-gaccent hidden">
+                <span class="font-bold">&gt;</span><span class="cursor-blink">&nbsp;</span>
+              </p>
+            </div>
+
+            <!-- CTA (hidden initially) -->
+            <div id="ctaContainer" class="mt-8 md:mt-10 opacity-0">
+              <a href="#services" class="cta-btn inline-block font-mono font-semibold text-sm md:text-base bg-gaccent text-gbg rounded-lg px-6 py-3 md:px-8 md:py-3.5">
+                Explore Our Services
+              </a>
+            </div>
+          </section>
+
+          <div class="section-sep"></div>
+
+          <!-- ===== ABOUT ===== -->
+          <section id="about" class="reveal">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="font-mono text-xs md:text-sm text-gtext3">$ cat about.md</span>
+              <span class="text-gtext3/50 text-sm">|</span>
+              <span class="font-mono text-xs text-gtext3">// About Us</span>
+            </div>
+            <h2 class="font-mono text-xl md:text-2xl font-bold text-gtext mb-4 tracking-tight">About</h2>
+            <div class="space-y-4 text-gtext text-sm md:text-base leading-relaxed max-w-3xl">
+              <p>
+                LE MINH is a registered IT service firm based in Ho Chi Minh City, providing high-end technical solutions for global clients. We bridge the gap between complex business requirements and scalable, future-proof code.
+              </p>
+              <p class="text-gtext2">
+                Our team brings deep expertise across the full software delivery lifecycle -- from initial architecture design through deployment and ongoing managed operations. We work as a true extension of your engineering team, not just an external vendor.
+              </p>
+            </div>
+          </section>
+
+          <div class="section-sep"></div>
+
+          <!-- ===== SERVICES ===== -->
+          <section id="services" class="reveal">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="font-mono text-xs md:text-sm text-gtext3">$ ls services/</span>
+              <span class="text-gtext3/50 text-sm">|</span>
+              <span class="font-mono text-xs text-gtext3">// What We Deliver</span>
+            </div>
+            <h2 class="font-mono text-xl md:text-2xl font-bold text-gtext mb-8 tracking-tight">Services</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+              <!-- Service 1 -->
+              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
+                <div class="font-mono text-xs text-gtext3 mb-2">[service-01]</div>
+                <h3 class="font-mono font-semibold text-gaccent text-base md:text-lg mb-2">Custom Software Development</h3>
+                <p class="text-gtext2 text-sm leading-relaxed">Bespoke web, mobile, and enterprise applications tailored to your unique business needs.</p>
+                <div class="mt-4 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  <span class="font-mono text-xs text-green-500">// operational</span>
+                </div>
+              </div>
+
+              <!-- Service 2 -->
+              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
+                <div class="font-mono text-xs text-gtext3 mb-2">[service-02]</div>
+                <h3 class="font-mono font-semibold text-gcyan text-base md:text-lg mb-2">Software Architecture &amp; Technical Consulting</h3>
+                <p class="text-gtext2 text-sm leading-relaxed">Expert guidance on system design, scalability, and technology strategy.</p>
+                <div class="mt-4 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  <span class="font-mono text-xs text-green-500">// operational</span>
+                </div>
+              </div>
+
+              <!-- Service 3 -->
+              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
+                <div class="font-mono text-xs text-gtext3 mb-2">[service-03]</div>
+                <h3 class="font-mono font-semibold text-gaccent text-base md:text-lg mb-2">API Development &amp; System Integration</h3>
+                <p class="text-gtext2 text-sm leading-relaxed">Robust, secure APIs and seamless integration between platforms and third-party services.</p>
+                <div class="mt-4 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  <span class="font-mono text-xs text-green-500">// operational</span>
+                </div>
+              </div>
+
+              <!-- Service 4 -->
+              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
+                <div class="font-mono text-xs text-gtext3 mb-2">[service-04]</div>
+                <h3 class="font-mono font-semibold text-gcyan text-base md:text-lg mb-2">Cloud Infrastructure &amp; DevOps</h3>
+                <p class="text-gtext2 text-sm leading-relaxed">Cloud migration, infrastructure automation, CI/CD pipelines, and scalable deployments.</p>
+                <div class="mt-4 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  <span class="font-mono text-xs text-green-500">// operational</span>
+                </div>
+              </div>
+
+              <!-- Service 5 -->
+              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
+                <div class="font-mono text-xs text-gtext3 mb-2">[service-05]</div>
+                <h3 class="font-mono font-semibold text-gaccent text-base md:text-lg mb-2">AI/ML Solutions &amp; Automation</h3>
+                <p class="text-gtext2 text-sm leading-relaxed">Intelligent features, workflow automation, and data-driven enhancements.</p>
+                <div class="mt-4 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  <span class="font-mono text-xs text-green-500">// operational</span>
+                </div>
+              </div>
+
+              <!-- Service 6 -->
+              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
+                <div class="font-mono text-xs text-gtext3 mb-2">[service-06]</div>
+                <h3 class="font-mono font-semibold text-gcyan text-base md:text-lg mb-2">Ongoing Support &amp; Maintenance</h3>
+                <p class="text-gtext2 text-sm leading-relaxed">Long-term managed services, security monitoring, performance optimization, and iterative improvements.</p>
+                <div class="mt-4 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  <span class="font-mono text-xs text-green-500">// operational</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="section-sep"></div>
+
+          <!-- ===== PROJECTS ===== -->
+          <section id="projects" class="reveal">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="font-mono text-xs md:text-sm text-gtext3">$ ls projects/</span>
+              <span class="text-gtext3/50 text-sm">|</span>
+              <span class="font-mono text-xs text-gtext3">// Recent Work</span>
+            </div>
+            <h2 class="font-mono text-xl md:text-2xl font-bold text-gtext mb-8 tracking-tight">Projects</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+
+              <!-- Project 1 -->
+              <div class="project-card border border-gborder rounded-xl p-5 md:p-6 bg-gsurface">
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Fintech</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">API</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">EU</span>
+                </div>
+                <h3 class="font-mono font-semibold text-gtext text-sm md:text-base mb-2">Fintech API Integration for European Startup</h3>
+                <p class="text-gtext2 text-xs md:text-sm leading-relaxed mb-4">Built a multi-provider payment API layer handling 50k+ daily transactions across 3 European banking partners.</p>
+                <a href="#" class="font-mono text-xs text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
+                  View case study
+                  <span class="text-gaccent">-&gt;</span>
+                </a>
+                <div class="mt-4 pt-3 border-t border-gborder flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-green-500">// completed</span>
+                  <span class="font-mono text-[10px] text-gtext3">2025</span>
+                </div>
+              </div>
+
+              <!-- Project 2 -->
+              <div class="project-card border border-gborder rounded-xl p-5 md:p-6 bg-gsurface">
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Cloud</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">DevOps</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">E-commerce</span>
+                </div>
+                <h3 class="font-mono font-semibold text-gtext text-sm md:text-base mb-2">Cloud Migration and DevOps for E-commerce Platform</h3>
+                <p class="text-gtext2 text-xs md:text-sm leading-relaxed mb-4">Migrated 12 microservices from legacy hosting to AWS ECS with automated CI/CD, cutting deploy time by 80%.</p>
+                <a href="#" class="font-mono text-xs text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
+                  View case study
+                  <span class="text-gaccent">-&gt;</span>
+                </a>
+                <div class="mt-4 pt-3 border-t border-gborder flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-green-500">// completed</span>
+                  <span class="font-mono text-[10px] text-gtext3">2025</span>
+                </div>
+              </div>
+
+              <!-- Project 3 -->
+              <div class="project-card border border-gborder rounded-xl p-5 md:p-6 bg-gsurface">
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">ERP</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Logistics</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Custom</span>
+                </div>
+                <h3 class="font-mono font-semibold text-gtext text-sm md:text-base mb-2">Custom ERP System for Logistics Provider</h3>
+                <p class="text-gtext2 text-xs md:text-sm leading-relaxed mb-4">Designed and built a full-stack ERP with inventory tracking, order management, and real-time reporting dashboards.</p>
+                <a href="#" class="font-mono text-xs text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
+                  View case study
+                  <span class="text-gaccent">-&gt;</span>
+                </a>
+                <div class="mt-4 pt-3 border-t border-gborder flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-green-500">// completed</span>
+                  <span class="font-mono text-[10px] text-gtext3">2024</span>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <div class="section-sep"></div>
+
+          <!-- ===== CONTACT ===== -->
+          <section id="contact" class="reveal">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="font-mono text-xs md:text-sm text-gtext3">$ cat contact.md</span>
+              <span class="text-gtext3/50 text-sm">|</span>
+              <span class="font-mono text-xs text-gtext3">// Get In Touch</span>
+            </div>
+            <h2 class="font-mono text-xl md:text-2xl font-bold text-gtext mb-8 tracking-tight">Contact</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8">
+
+              <!-- Left: Contact Details -->
+              <div class="lg:col-span-3 space-y-5">
+                <!-- Address -->
+                <div class="flex items-start gap-3">
+                  <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-mono text-xs text-gtext2 mb-0.5">// Address</p>
+                    <p class="text-gtext text-sm md:text-base leading-relaxed">
+                      129/5A Hoang Van Thu, Phuong Phu Nhuan<br />
+                      Thanh pho Ho Chi Minh, Viet Nam
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="flex items-start gap-3">
+                  <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="2"/>
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-mono text-xs text-gtext2 mb-0.5">// Email</p>
+                    <a href="mailto:leanhminh5@gmail.com" class="text-gaccent hover:text-gaccent/80 font-mono text-sm md:text-base transition-colors break-all">
+                      leanhminh5@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="flex items-start gap-3">
+                  <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-mono text-xs text-gtext2 mb-0.5">// Phone</p>
+                    <a href="tel:+84786599687" class="text-gtext hover:text-gaccent font-mono text-sm md:text-base transition-colors">
+                      +84 786 599 687
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Office hours note -->
+                <div class="pt-2">
+                  <p class="font-mono text-xs text-gtext3">
+                    <span class="text-gaccent">//</span> We respond within 24 hours on business days
+                  </p>
+                </div>
+              </div>
+
+              <!-- Right: CTA Callout -->
+              <div class="lg:col-span-2 bg-gaccent/[0.06] border border-dashed border-gaccent/40 rounded-xl p-5 md:p-7 flex flex-col justify-center">
+                <p class="font-mono text-xs text-gtext3 mb-2">[call-to-action]</p>
+                <h3 class="font-mono font-semibold text-lg text-gtext mb-2">Ready to build something?</h3>
+                <p class="text-gtext2 text-sm leading-relaxed mb-5">
+                  We are actively taking on new clients. Send us a message and we will get back to you within one business day.
+                </p>
+                <a href="mailto:leanhminh5@gmail.com" class="font-mono font-semibold text-sm bg-gaccent text-gbg rounded-lg px-5 py-3 cta-btn inline-block text-center">
+                  leanhminh5@gmail.com
+                </a>
+                <p class="font-mono text-xs text-gtext3 mt-3 text-center">
+                  or call <a href="tel:+84786599687" class="text-gaccent hover:text-gaccent/80">+84 786 599 687</a>
+                </p>
+              </div>
+
+            </div>
+          </section>
+
+        </div><!-- /terminal body -->
+      </div><!-- /terminal window -->
+    </div><!-- /container -->
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="border-t border-gborder bg-gsurface mt-8 md:mt-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 text-center">
+      <p class="font-mono text-sm text-gaccent mb-2">[exit 0]</p>
+      <p class="font-mono text-xs text-gtext3">
+        &copy; 2026 LE MINH. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // --- Typing Effect ---
+      const line1Text = 'Initializing LE MINH Services...';
+      const line2Text = 'Specialized in Software Architecture, API Integration, and Cloud Infrastructure.';
+      const line1El = document.getElementById('line1text');
+      const line2El = document.getElementById('line2text');
+      const cursorLine = document.getElementById('cursorLine');
+      const ctaContainer = document.getElementById('ctaContainer');
+
+      let idx1 = 0;
+      let idx2 = 0;
+      let phase = 'line1'; // 'line1' | 'pause' | 'line2' | 'done'
+
+      function typeLine1() {
+        if (idx1 < line1Text.length) {
+          line1El.textContent += line1Text[idx1];
+          idx1++;
+          setTimeout(typeLine1, 50);
+        } else {
+          phase = 'pause';
+          setTimeout(typeLine2, 600);
+        }
+      }
+
+      function typeLine2() {
+        phase = 'line2';
+        if (idx2 < line2Text.length) {
+          line2El.textContent += line2Text[idx2];
+          idx2++;
+          setTimeout(typeLine2, 35);
+        } else {
+          phase = 'done';
+          cursorLine.classList.remove('hidden');
+          ctaContainer.classList.remove('opacity-0');
+          ctaContainer.classList.add('animate-fade-in');
+        }
+      }
+
+      // Start typing after a short delay
+      setTimeout(typeLine1, 400);
+
+      // --- Mobile Menu ---
+      const menuBtn = document.getElementById('menuBtn');
+      const closeMenuBtn = document.getElementById('closeMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      function openMenu() {
+        mobileMenu.classList.remove('closed');
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        mobileMenu.classList.remove('open');
+        mobileMenu.classList.add('closed');
+        document.body.style.overflow = '';
+      }
+
+      menuBtn.addEventListener('click', openMenu);
+      closeMenuBtn.addEventListener('click', closeMenu);
+      mobileNavLinks.forEach(function(link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // --- Scroll Reveal (IntersectionObserver) ---
+      const revealEls = document.querySelectorAll('.reveal');
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealEls.forEach(function(el) {
+          observer.observe(el);
+        });
+      } else {
+        // Fallback: show all
+        revealEls.forEach(function(el) {
+          el.classList.add('visible');
+        });
+      }
+
+      // --- Navbar active state on scroll ---
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-underline');
+
+      function updateActiveLink() {
+        let current = '';
+        sections.forEach(function(section) {
+          const top = section.getBoundingClientRect().top;
+          if (top <= 150) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveLink);
+
+    })();
+  </script>
+</body>
+</html>
