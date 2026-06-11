@@ -46,18 +46,19 @@ export default function CaseStudyCard({
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <span
             className="text-[12px] flex-shrink-0"
-            style={{ color: "var(--color-text-tertiary)" }}
+            style={{ color: "var(--color-comment)" }}
           >
             [{tag}]
           </span>
-          <h3 className="font-semibold text-sm md:text-[15px] truncate">
+          <h3 className="font-semibold text-sm md:text-[15px] truncate"
+            style={{ color: "var(--color-accent)" }}>
             {title}
           </h3>
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
           <span
             className="hidden sm:inline-block text-[11px]"
-            style={{ color: "var(--color-text-tertiary)" }}
+            style={{ color: "var(--color-comment)" }}
           >
             // {subtitle}
           </span>
@@ -65,7 +66,7 @@ export default function CaseStudyCard({
             animate={{ rotate: open ? 180 : 0 }}
             transition={{ type: "spring", damping: 15, stiffness: 150 }}
             className="w-4 h-4"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-comment)" }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
@@ -93,12 +94,12 @@ export default function CaseStudyCard({
             >
               {/* Challenge */}
               <div>
-                <p className="text-[11px] mb-1.5" style={{ color: "var(--color-text-tertiary)" }}>
+                <p className="text-[11px] mb-1.5" style={{ color: "var(--color-comment)" }}>
                   // challenge
                 </p>
                 <p
                   className="text-[13px] leading-relaxed transition-theme"
-                  style={{ color: "var(--color-text-secondary)" }}
+                  style={{ color: "var(--color-string)" }}
                 >
                   {challenge}
                 </p>
@@ -106,12 +107,12 @@ export default function CaseStudyCard({
 
               {/* Solution */}
               <div>
-                <p className="text-[11px] mb-1.5" style={{ color: "var(--color-text-tertiary)" }}>
+                <p className="text-[11px] mb-1.5" style={{ color: "var(--color-comment)" }}>
                   // solution
                 </p>
                 <p
                   className="text-[13px] leading-relaxed transition-theme"
-                  style={{ color: "var(--color-text-secondary)" }}
+                  style={{ color: "var(--color-string)" }}
                 >
                   {solution}
                 </p>
@@ -119,7 +120,7 @@ export default function CaseStudyCard({
 
               {/* Technologies */}
               <div>
-                <p className="text-[11px] mb-1.5" style={{ color: "var(--color-text-tertiary)" }}>
+                <p className="text-[11px] mb-1.5" style={{ color: "var(--color-comment)" }}>
                   // technologies
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -141,7 +142,7 @@ export default function CaseStudyCard({
 
               {/* Results */}
               <div>
-                <p className="text-[11px] mb-1.5" style={{ color: "var(--color-text-tertiary)" }}>
+                <p className="text-[11px] mb-1.5" style={{ color: "var(--color-comment)" }}>
                   // results
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -156,13 +157,13 @@ export default function CaseStudyCard({
                     >
                       <p
                         className="font-bold text-lg"
-                        style={{ color: "var(--color-accent)" }}
+                        style={{ color: "var(--color-number)" }}
                       >
                         {r.value}
                       </p>
                       <p
                         className="text-[11px] transition-theme"
-                        style={{ color: "var(--color-text-secondary)" }}
+                        style={{ color: "var(--color-comment)" }}
                       >
                         {r.label}
                       </p>

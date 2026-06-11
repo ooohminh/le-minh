@@ -17,13 +17,13 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className="flex items-center gap-2 mb-3">
-      <span style={{ color: "var(--color-accent)" }}>$</span>
-      <span style={{ color: "var(--color-accent-secondary)" }}>{command}</span>
-      <span style={{ color: "var(--color-accent-secondary)" }}>{arg}</span>
-      <span className="text-xs" style={{ color: "var(--color-text-tertiary)" }}>
+      <span style={{ color: "var(--color-prompt)" }}>$</span>
+      <span style={{ color: "var(--color-accent)" }}>{command}</span>
+      <span style={{ color: "var(--color-variable)" }}>{arg}</span>
+      <span className="text-xs" style={{ color: "var(--color-comment)" }}>
         |
       </span>
-      <span style={{ color: "var(--color-text-tertiary)" }}>// {comment}</span>
+      <span style={{ color: "var(--color-comment)" }}>// {comment}</span>
       {children}
     </div>
   );

@@ -59,8 +59,8 @@ export default function HeroSection() {
 
       <div className="relative z-10 space-y-1 text-[15px] md:text-base leading-relaxed">
         {/* Line 1 */}
-        <p style={{ color: "var(--color-accent)" }}>
-          <span style={{ color: "var(--color-accent)" }}>$</span>{" "}
+        <p style={{ color: "var(--color-prompt)" }}>
+          <span style={{ color: "var(--color-prompt)" }}>$</span>{" "}
           <span>
             {LINE1.slice(0, charIndex1)}
             {phase === "line1" && charIndex1 < LINE1.length && (
@@ -72,7 +72,7 @@ export default function HeroSection() {
         {/* Line 2 */}
         {(phase === "line2" || phase === "done") && (
           <p>
-            <span style={{ color: "var(--color-accent)" }}>$</span>{" "}
+            <span style={{ color: "var(--color-prompt)" }}>$</span>{" "}
             <span style={{ color: "var(--color-text-primary)" }}>
               {LINE2.slice(0, charIndex2)}
               {phase === "line2" && charIndex2 < LINE2.length ? (
@@ -84,8 +84,8 @@ export default function HeroSection() {
 
         {/* Cursor line after done */}
         {phase === "done" && (
-          <p style={{ color: "var(--color-accent)" }}>
-            <span style={{ color: "var(--color-accent)" }}>$</span>
+          <p style={{ color: "var(--color-prompt)" }}>
+            <span style={{ color: "var(--color-prompt)" }}>$</span>
             <span className="cursor-blink">&nbsp;</span>
           </p>
         )}

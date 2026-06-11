@@ -19,7 +19,7 @@ export default function ServiceCard({
   const colorVar =
     accentColor === "primary"
       ? "var(--color-accent)"
-      : "var(--color-accent-secondary)";
+      : "var(--color-variable)";
 
   return (
     <motion.div
@@ -53,7 +53,7 @@ export default function ServiceCard({
     >
       <div
         className="text-[12px] mb-2"
-        style={{ color: "var(--color-text-tertiary)" }}
+        style={{ color: "var(--color-comment)" }}
       >
         {tag}
       </div>
@@ -65,7 +65,7 @@ export default function ServiceCard({
       </h3>
       <p
         className="text-[13px] leading-relaxed transition-theme"
-        style={{ color: "var(--color-text-secondary)" }}
+        style={{ color: "var(--color-string)" }}
       >
         {description}
       </p>

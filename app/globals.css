@@ -11,7 +11,6 @@
   --color-text-secondary: #6e738d;
   --color-text-tertiary: #5c5f64;
   --color-accent: #9ece6a;
-  --color-accent-secondary: #7dcfff;
   --color-accent-glow: rgba(158, 206, 106, 0.07);
   --color-border: #252b38;
   --color-success: #9ece6a;
@@ -19,6 +18,12 @@
   --color-traffic-red: #ff5f57;
   --color-traffic-yellow: #ffbd2e;
   --color-traffic-green: #27c93f;
+  /* Syntax colors */
+  --color-prompt: #9ece6a;
+  --color-string: #bb9af7;
+  --color-comment: #6e738d;
+  --color-variable: #7dcfff;
+  --color-number: #e0af68;
 }
 
 [data-theme="catppuccin-mocha"] {
@@ -30,11 +35,15 @@
   --color-text-secondary: #a6adc8;
   --color-text-tertiary: #6c7086;
   --color-accent: #cba6f7;
-  --color-accent-secondary: #89b4fa;
   --color-accent-glow: rgba(203, 166, 247, 0.07);
   --color-border: #313244;
   --color-success: #a6e3a1;
   --color-danger: #f38ba8;
+  --color-prompt: #a6e3a1;
+  --color-string: #f5c2e7;
+  --color-comment: #6c7086;
+  --color-variable: #89b4fa;
+  --color-number: #fab387;
 }
 
 [data-theme="catppuccin-macchiato"] {
@@ -46,11 +55,15 @@
   --color-text-secondary: #a5adcb;
   --color-text-tertiary: #6e738d;
   --color-accent: #c6a0f6;
-  --color-accent-secondary: #8aadf4;
   --color-accent-glow: rgba(198, 160, 246, 0.07);
   --color-border: #363a4f;
   --color-success: #a6da95;
   --color-danger: #ed8796;
+  --color-prompt: #a6da95;
+  --color-string: #f5bde6;
+  --color-comment: #6e738d;
+  --color-variable: #8aadf4;
+  --color-number: #f5a97f;
 }
 
 [data-theme="github-dark"] {
@@ -62,11 +75,15 @@
   --color-text-secondary: #8b949e;
   --color-text-tertiary: #484f58;
   --color-accent: #58a6ff;
-  --color-accent-secondary: #3fb950;
   --color-accent-glow: rgba(88, 166, 255, 0.07);
   --color-border: #30363d;
   --color-success: #3fb950;
   --color-danger: #f85149;
+  --color-prompt: #3fb950;
+  --color-string: #a5d6ff;
+  --color-comment: #8b949e;
+  --color-variable: #79c0ff;
+  --color-number: #ffa657;
 }
 
 [data-theme="tokyo-night"] {
@@ -78,11 +95,15 @@
   --color-text-secondary: #787c99;
   --color-text-tertiary: #565f89;
   --color-accent: #7aa2f7;
-  --color-accent-secondary: #bb9af7;
   --color-accent-glow: rgba(122, 162, 247, 0.07);
   --color-border: #32344a;
   --color-success: #9ece6a;
   --color-danger: #f7768e;
+  --color-prompt: #9ece6a;
+  --color-string: #bb9af7;
+  --color-comment: #565f89;
+  --color-variable: #73daca;
+  --color-number: #e0af68;
 }
 
 [data-theme] {
@@ -107,6 +128,9 @@ html {
 
 body {
   font-family: 'SF Mono', 'JetBrains Mono', Menlo, Monaco, monospace;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
   background: var(--color-bg-base);
   color: var(--color-text-primary);
   position: relative;
@@ -169,25 +193,18 @@ body::after {
 /* Cursor blink */
 .cursor-blink::after {
   content: '_';
-  color: var(--color-accent);
+  color: var(--color-prompt);
   animation: blink 1s step-end infinite;
 }
 
 @keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
