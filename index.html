@@ -31,32 +31,20 @@
       theme: {
         extend: {
           fontFamily: {
-            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+            sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', '"SF Mono"', 'Menlo', 'Monaco', 'monospace'],
           },
           colors: {
             'gbg': '#0d1117',
+            'menubar': '#1e242c',
             'gsurface': '#161b22',
             'ghover': '#1c2128',
             'gborder': '#30363d',
-            'gtext': '#e6edf3',
+            'gtext': '#c9d1d9',
             'gtext2': '#8b949e',
             'gtext3': '#484f58',
             'gaccent': '#22c55e',
             'gcyan': '#67e8f9',
-          },
-          animation: {
-            'fade-in': 'fadeIn 0.8s ease-out forwards',
-            'slide-up': 'slideUp 0.5s ease-out forwards',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { opacity: '0', transform: 'translateY(20px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' },
-            },
           },
         },
       },
@@ -66,11 +54,54 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #0d1117;
-      color: #e6edf3;
+      color: #c9d1d9;
+      position: relative;
+      overflow-x: hidden;
     }
-    .font-mono, .nav-link, .terminal-text { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace; }
+    .font-mono, .terminal-text { font-family: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, monospace; }
+
+    /* Background noise texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Subtle gradient overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 15%, rgba(34,197,94,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Main content above noise */
+    main, nav, footer { position: relative; z-index: 1; }
+
+    /* Terminal glow */
+    .terminal-glow-inner {
+      position: relative;
+    }
+    .terminal-glow-inner::before {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      width: 500px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(34,197,94,0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .terminal-glow-inner > * { position: relative; z-index: 1; }
 
     /* Cursor blink */
     .cursor-blink::after {
@@ -83,24 +114,7 @@
       50% { opacity: 0; }
     }
 
-    /* Terminal glow */
-    .terminal-glow {
-      position: relative;
-    }
-    .terminal-glow::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 400px;
-      height: 400px;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(ellipse, rgba(34,197,94,0.10) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Scroll animation */
+    /* Scroll reveal */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -111,27 +125,7 @@
       transform: translateY(0);
     }
 
-    /* Nav link underline */
-    .nav-underline {
-      position: relative;
-    }
-    .nav-underline::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: #22c55e;
-      transition: all 0.2s ease;
-      transform: translateX(-50%);
-    }
-    .nav-underline:hover::after,
-    .nav-underline.active::after {
-      width: 100%;
-    }
-
-    /* Card hover */
+    /* Card hovers */
     .service-card {
       transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
     }
@@ -140,7 +134,6 @@
       transform: translateY(-2px);
       background: #1c2128;
     }
-
     .project-card {
       transition: border-color 0.2s ease, transform 0.2s ease;
     }
@@ -148,14 +141,29 @@
       border-color: #22c55e !important;
       transform: translateY(-2px);
     }
-
-    /* CTA button */
     .cta-btn {
       transition: transform 0.2s ease, filter 0.2s ease;
     }
     .cta-btn:hover {
       transform: scale(1.03);
       filter: brightness(1.15);
+    }
+
+    /* Case study accordion */
+    .case-toggle { cursor: pointer; }
+    .case-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .case-body.open {
+      max-height: 800px;
+    }
+    .case-chevron {
+      transition: transform 0.3s ease;
+    }
+    .case-chevron.open {
+      transform: rotate(180deg);
     }
 
     /* Mobile menu */
@@ -172,21 +180,22 @@
       pointer-events: none;
     }
 
-    /* Typing container */
-    .typed-text { min-height: 1.8em; }
-
-    /* Separator line */
+    /* Separator */
     .section-sep {
       height: 1px;
       background: #30363d;
       margin: 2.5rem 0;
     }
-
     @media (max-width: 767px) {
       .section-sep { margin: 2rem 0; }
     }
 
-    /* Reduced motion */
+    /* macOS traffic light dots spacing */
+    .traffic-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+    /* Typing container */
+    .typed-text { min-height: 1.8em; }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -196,106 +205,134 @@
     }
   </style>
 </head>
-<body class="bg-gbg min-h-screen">
+<body>
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-gsurface/95 backdrop-blur-sm border-b border-gborder">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="#" class="font-mono text-gaccent font-bold text-lg flex items-center gap-1.5">
-        <span class="text-gaccent">&gt;</span>
-        <span class="text-gtext tracking-tight">LE MINH</span>
-        <span class="text-gaccent animate-pulse" style="animation-duration: 1.5s;">_</span>
-      </a>
-
-      <!-- Desktop nav -->
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#services" class="nav-link nav-underline text-gtext2 hover:text-gtext font-medium text-sm transition-colors duration-200">Services</a>
-        <a href="#projects" class="nav-link nav-underline text-gtext2 hover:text-gtext font-medium text-sm transition-colors duration-200">Projects</a>
-        <a href="#contact" class="nav-link nav-underline text-gtext2 hover:text-gtext font-medium text-sm transition-colors duration-200">Contact</a>
-        <a href="#contact" class="font-mono text-xs bg-gaccent/10 text-gaccent border border-gaccent/30 rounded-md px-3 py-1.5 cta-btn font-semibold">Hire Us</a>
+  <!-- ====== GLOBAL macOS MENU BAR ====== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#1e242c]/95 backdrop-blur-md border-b border-[#30363d] h-7 select-none">
+    <div class="h-full max-w-5xl mx-auto px-4 flex items-center justify-between text-[13px]">
+      <!-- Left: Apple icon + Logo + Menus -->
+      <div class="flex items-center gap-0.5">
+        <!-- Apple-style terminal icon -->
+        <span class="text-gtext font-semibold mr-1.5 flex items-center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9d1d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </span>
+        <span class="text-gtext font-semibold tracking-tight mr-3">LE MINH</span>
+        <!-- Desktop menu items -->
+        <div class="hidden md:flex items-center gap-3">
+          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">File</span>
+          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">Edit</span>
+          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">View</span>
+          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">Window</span>
+          <span class="text-gtext2 hover:text-gtext transition-colors cursor-default">Help</span>
+        </div>
       </div>
 
-      <!-- Hamburger (mobile) -->
-      <button id="menuBtn" class="md:hidden p-2 text-gtext2 hover:text-gaccent transition-colors" aria-label="Toggle menu">
-        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="4" y1="6" x2="20" y2="6" />
-          <line x1="4" y1="12" x2="20" y2="12" />
-          <line x1="4" y1="18" x2="20" y2="18" />
-        </svg>
-      </button>
+      <!-- Right: Status icons + Time -->
+      <div class="flex items-center gap-3">
+        <!-- Wi-Fi icon -->
+        <svg class="text-gtext2 hidden sm:block" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.94 0"/>
+          <circle cx="12" cy="20" r="1"/></svg>
+        <!-- Battery icon -->
+        <svg class="text-gtext2 hidden sm:block" width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/>
+          <line x1="7" y1="10" x2="7" y2="14"/></svg>
+        <!-- Time -->
+        <span id="menubarClock" class="text-gtext2 text-[13px] min-w-[3.5rem] text-right">00:00</span>
+        <!-- Mobile hamburger -->
+        <button id="menuBtn" class="md:hidden p-1 text-gtext2 hover:text-gaccent transition-colors" aria-label="Menu">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <!-- Mobile menu overlay -->
-  <div id="mobileMenu" class="mobile-menu closed fixed inset-0 z-40 bg-gbg/98 backdrop-blur-md flex flex-col items-center justify-center gap-8 md:hidden">
-    <button id="closeMenuBtn" class="absolute top-4 right-4 p-2 text-gtext2 hover:text-gaccent transition-colors" aria-label="Close menu">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
+  <!-- ====== MOBILE OVERLAY MENU ====== -->
+  <div id="mobileMenu" class="mobile-menu closed fixed inset-0 z-40 bg-[#0d1117]/98 backdrop-blur-xl flex flex-col items-center justify-center gap-7 md:hidden">
+    <button id="closeMenuBtn" class="absolute top-3 right-4 p-2 text-gtext2 hover:text-gaccent" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
     </button>
-    <a href="#services" class="mobile-nav-link font-mono text-xl text-gtext2 hover:text-gaccent transition-colors">Services</a>
-    <a href="#projects" class="mobile-nav-link font-mono text-xl text-gtext2 hover:text-gaccent transition-colors">Projects</a>
-    <a href="#contact" class="mobile-nav-link font-mono text-xl text-gtext2 hover:text-gaccent transition-colors">Contact</a>
-    <a href="#contact" class="font-mono text-base bg-gaccent text-gbg font-bold rounded-lg px-6 py-3 cta-btn">Hire Us</a>
+    <a href="#services" class="mobile-nav-link font-mono text-lg text-gtext2 hover:text-gaccent transition-colors">Services</a>
+    <a href="#projects" class="mobile-nav-link font-mono text-lg text-gtext2 hover:text-gaccent transition-colors">Projects</a>
+    <a href="#case-studies" class="mobile-nav-link font-mono text-lg text-gtext2 hover:text-gaccent transition-colors">Case Studies</a>
+    <a href="#contact" class="mobile-nav-link font-mono text-lg text-gtext2 hover:text-gaccent transition-colors">Contact</a>
+    <a href="#contact" class="font-mono text-sm bg-gaccent text-gbg font-bold rounded-lg px-6 py-3 cta-btn">Hire Us</a>
   </div>
 
-  <!-- Main content -->
-  <main class="pt-14">
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="pt-12 md:pt-16 pb-10">
 
-    <!-- Terminal Window Container -->
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <!-- macOS Window Container -->
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6">
 
-      <!-- Terminal window -->
-      <div class="terminal-glow bg-gsurface border border-gborder rounded-xl md:rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(34,197,94,0.06)]">
+      <!-- macOS Window Frame -->
+      <div class="bg-[#161b22]/95 backdrop-blur-xl border border-[#30363d] rounded-xl md:rounded-2xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5),0_0_40px_rgba(34,197,94,0.04)] overflow-hidden">
 
-        <!-- Terminal title bar -->
-        <div class="flex items-center gap-2 px-4 md:px-6 h-11 border-b border-gborder">
-          <span class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full" style="background:#ff5f57"></span>
-          <span class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full" style="background:#febc2e"></span>
-          <span class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full" style="background:#28c840"></span>
-          <span class="ml-3 font-mono text-xs text-gtext3">le-minh@consulting:~$</span>
+        <!-- Window Titlebar -->
+        <div class="h-9 flex items-center border-b border-[#30363d] px-4 select-none">
+          <!-- Traffic lights -->
+          <div class="flex items-center gap-[8px]">
+            <span class="traffic-dot" style="background:#ff5f57"></span>
+            <span class="traffic-dot" style="background:#ffbd2e"></span>
+            <span class="traffic-dot" style="background:#27c93f"></span>
+          </div>
+          <!-- Window title -->
+          <div class="flex-1 text-center">
+            <span class="text-[13px] text-gtext2 font-semibold" style="font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+              le-minh@consulting:~
+            </span>
+          </div>
+          <!-- Spacer to keep title centered -->
+          <div class="w-[60px]"></div>
         </div>
 
-        <!-- Terminal body -->
-        <div class="px-5 sm:px-8 md:px-12 py-6 md:py-10">
+        <!-- Window Inner Content -->
+        <div class="px-5 sm:px-8 md:px-10 py-6 md:py-9 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
 
-          <!-- ===== HERO ===== -->
-          <section id="home" class="min-h-[50vh] md:min-h-[55vh] flex flex-col justify-center">
-            <div class="space-y-1.5 font-mono text-base md:text-xl leading-relaxed">
-              <p id="line1" class="typed-text text-gaccent font-semibold">
-                <span class="text-gaccent font-bold">&gt;</span>
-                <span id="line1text"></span>
-              </p>
-              <p id="line2" class="typed-text text-gtext">
-                <span class="text-gaccent font-bold">&gt;</span>
-                <span id="line2text"></span>
-              </p>
-              <p id="cursorLine" class="text-gaccent hidden">
-                <span class="font-bold">&gt;</span><span class="cursor-blink">&nbsp;</span>
-              </p>
-            </div>
+          <!-- Glow container for hero -->
+          <div class="terminal-glow-inner">
 
-            <!-- CTA (hidden initially) -->
-            <div id="ctaContainer" class="mt-8 md:mt-10 opacity-0">
-              <a href="#services" class="cta-btn inline-block font-mono font-semibold text-sm md:text-base bg-gaccent text-gbg rounded-lg px-6 py-3 md:px-8 md:py-3.5">
-                Explore Our Services
-              </a>
-            </div>
-          </section>
+            <!-- ====== HERO ====== -->
+            <section id="home" class="min-h-[45vh] md:min-h-[50vh] flex flex-col justify-center">
+              <div class="space-y-1 font-mono text-sm md:text-base leading-relaxed">
+                <p id="line1" class="typed-text text-gaccent font-semibold">
+                  <span class="text-gaccent font-bold">&gt;</span>
+                  <span id="line1text"></span>
+                </p>
+                <p id="line2" class="typed-text">
+                  <span class="text-gaccent font-bold">&gt;</span>
+                  <span id="line2text" class="text-gtext"></span>
+                </p>
+                <p id="cursorLine" class="text-gaccent hidden">
+                  <span class="font-bold">&gt;</span><span class="cursor-blink">&nbsp;</span>
+                </p>
+              </div>
+              <div id="ctaContainer" class="mt-8 md:mt-10 opacity-0">
+                <a href="#services" class="cta-btn inline-block font-mono font-semibold text-sm bg-gaccent text-gbg rounded-lg px-6 py-3 md:px-8 md:py-3.5">
+                  Explore Our Services
+                </a>
+              </div>
+            </section>
+
+          </div><!-- /glow -->
 
           <div class="section-sep"></div>
 
-          <!-- ===== ABOUT ===== -->
+          <!-- ====== ABOUT ====== -->
           <section id="about" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-xs md:text-sm text-gtext3">$ cat about.md</span>
-              <span class="text-gtext3/50 text-sm">|</span>
-              <span class="font-mono text-xs text-gtext3">// About Us</span>
+              <span class="font-mono text-[11px] text-gtext3">$ cat about.md</span>
+              <span class="text-gtext3/50 text-xs">|</span>
+              <span class="font-mono text-[11px] text-gtext3">// About Us</span>
             </div>
-            <h2 class="font-mono text-xl md:text-2xl font-bold text-gtext mb-4 tracking-tight">About</h2>
-            <div class="space-y-4 text-gtext text-sm md:text-base leading-relaxed max-w-3xl">
+            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-5 tracking-tight">About</h2>
+            <div class="space-y-4 text-sm md:text-[15px] leading-relaxed max-w-3xl">
               <p>
                 LE MINH is a registered IT service firm based in Ho Chi Minh City, providing high-end technical solutions for global clients. We bridge the gap between complex business requirements and scalable, future-proof code.
               </p>
@@ -307,79 +344,74 @@
 
           <div class="section-sep"></div>
 
-          <!-- ===== SERVICES ===== -->
+          <!-- ====== SERVICES ====== -->
           <section id="services" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-xs md:text-sm text-gtext3">$ ls services/</span>
-              <span class="text-gtext3/50 text-sm">|</span>
-              <span class="font-mono text-xs text-gtext3">// What We Deliver</span>
+              <span class="font-mono text-[11px] text-gtext3">$ ls services/</span>
+              <span class="text-gtext3/50 text-xs">|</span>
+              <span class="font-mono text-[11px] text-gtext3">// What We Deliver</span>
             </div>
-            <h2 class="font-mono text-xl md:text-2xl font-bold text-gtext mb-8 tracking-tight">Services</h2>
-
+            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-7 tracking-tight">Services</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              <!-- Service 1 -->
-              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
-                <div class="font-mono text-xs text-gtext3 mb-2">[service-01]</div>
-                <h3 class="font-mono font-semibold text-gaccent text-base md:text-lg mb-2">Custom Software Development</h3>
-                <p class="text-gtext2 text-sm leading-relaxed">Bespoke web, mobile, and enterprise applications tailored to your unique business needs.</p>
+
+              <!-- S1 -->
+              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
+                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-01]</div>
+                <h3 class="font-mono font-semibold text-gaccent text-sm md:text-base mb-2">Custom Software Development</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed">Bespoke web, mobile, and enterprise applications tailored to your unique business needs.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                  <span class="font-mono text-xs text-green-500">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
                 </div>
               </div>
-
-              <!-- Service 2 -->
-              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
-                <div class="font-mono text-xs text-gtext3 mb-2">[service-02]</div>
-                <h3 class="font-mono font-semibold text-gcyan text-base md:text-lg mb-2">Software Architecture &amp; Technical Consulting</h3>
-                <p class="text-gtext2 text-sm leading-relaxed">Expert guidance on system design, scalability, and technology strategy.</p>
+              <!-- S2 -->
+              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
+                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-02]</div>
+                <h3 class="font-mono font-semibold text-gcyan text-sm md:text-base mb-2">Software Architecture &amp; Consulting</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed">Expert guidance on system design, scalability, and technology strategy.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                  <span class="font-mono text-xs text-green-500">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
                 </div>
               </div>
-
-              <!-- Service 3 -->
-              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
-                <div class="font-mono text-xs text-gtext3 mb-2">[service-03]</div>
-                <h3 class="font-mono font-semibold text-gaccent text-base md:text-lg mb-2">API Development &amp; System Integration</h3>
-                <p class="text-gtext2 text-sm leading-relaxed">Robust, secure APIs and seamless integration between platforms and third-party services.</p>
+              <!-- S3 -->
+              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
+                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-03]</div>
+                <h3 class="font-mono font-semibold text-gaccent text-sm md:text-base mb-2">API Development &amp; Integration</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed">Robust, secure APIs and seamless integration between platforms and third-party services.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                  <span class="font-mono text-xs text-green-500">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
                 </div>
               </div>
-
-              <!-- Service 4 -->
-              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
-                <div class="font-mono text-xs text-gtext3 mb-2">[service-04]</div>
-                <h3 class="font-mono font-semibold text-gcyan text-base md:text-lg mb-2">Cloud Infrastructure &amp; DevOps</h3>
-                <p class="text-gtext2 text-sm leading-relaxed">Cloud migration, infrastructure automation, CI/CD pipelines, and scalable deployments.</p>
+              <!-- S4 -->
+              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
+                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-04]</div>
+                <h3 class="font-mono font-semibold text-gcyan text-sm md:text-base mb-2">Cloud Infrastructure &amp; DevOps</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed">Cloud migration, infrastructure automation, CI/CD pipelines, and scalable deployments.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                  <span class="font-mono text-xs text-green-500">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
                 </div>
               </div>
-
-              <!-- Service 5 -->
-              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
-                <div class="font-mono text-xs text-gtext3 mb-2">[service-05]</div>
-                <h3 class="font-mono font-semibold text-gaccent text-base md:text-lg mb-2">AI/ML Solutions &amp; Automation</h3>
-                <p class="text-gtext2 text-sm leading-relaxed">Intelligent features, workflow automation, and data-driven enhancements.</p>
+              <!-- S5 -->
+              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
+                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-05]</div>
+                <h3 class="font-mono font-semibold text-gaccent text-sm md:text-base mb-2">AI/ML Solutions &amp; Automation</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed">Intelligent features, workflow automation, and data-driven enhancements.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                  <span class="font-mono text-xs text-green-500">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
                 </div>
               </div>
-
-              <!-- Service 6 -->
-              <div class="service-card border border-gborder rounded-xl p-5 md:p-6 cursor-default">
-                <div class="font-mono text-xs text-gtext3 mb-2">[service-06]</div>
-                <h3 class="font-mono font-semibold text-gcyan text-base md:text-lg mb-2">Ongoing Support &amp; Maintenance</h3>
-                <p class="text-gtext2 text-sm leading-relaxed">Long-term managed services, security monitoring, performance optimization, and iterative improvements.</p>
+              <!-- S6 -->
+              <div class="service-card border border-[#30363d] rounded-lg p-5 cursor-default">
+                <div class="font-mono text-[11px] text-gtext3 mb-2">[service-06]</div>
+                <h3 class="font-mono font-semibold text-gcyan text-sm md:text-base mb-2">Support &amp; Maintenance</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed">Long-term managed services, security monitoring, performance optimization, and iterative improvements.</p>
                 <div class="mt-4 flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                  <span class="font-mono text-xs text-green-500">// operational</span>
+                  <span class="w-[6px] h-[6px] rounded-full" style="background:#3fb950"></span>
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// operational</span>
                 </div>
               </div>
             </div>
@@ -387,71 +419,257 @@
 
           <div class="section-sep"></div>
 
-          <!-- ===== PROJECTS ===== -->
+          <!-- ====== PROJECTS ====== -->
           <section id="projects" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-xs md:text-sm text-gtext3">$ ls projects/</span>
-              <span class="text-gtext3/50 text-sm">|</span>
-              <span class="font-mono text-xs text-gtext3">// Recent Work</span>
+              <span class="font-mono text-[11px] text-gtext3">$ ls projects/</span>
+              <span class="text-gtext3/50 text-xs">|</span>
+              <span class="font-mono text-[11px] text-gtext3">// Recent Work</span>
             </div>
-            <h2 class="font-mono text-xl md:text-2xl font-bold text-gtext mb-8 tracking-tight">Projects</h2>
-
+            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-7 tracking-tight">Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
 
-              <!-- Project 1 -->
-              <div class="project-card border border-gborder rounded-xl p-5 md:p-6 bg-gsurface">
+              <!-- P1 -->
+              <div class="project-card border border-[#30363d] rounded-lg p-5 bg-gsurface">
                 <div class="flex flex-wrap gap-1.5 mb-3">
                   <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Fintech</span>
                   <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">API</span>
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">EU</span>
                 </div>
-                <h3 class="font-mono font-semibold text-gtext text-sm md:text-base mb-2">Fintech API Integration for European Startup</h3>
-                <p class="text-gtext2 text-xs md:text-sm leading-relaxed mb-4">Built a multi-provider payment API layer handling 50k+ daily transactions across 3 European banking partners.</p>
-                <a href="#" class="font-mono text-xs text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
-                  View case study
-                  <span class="text-gaccent">-&gt;</span>
+                <h3 class="font-mono font-semibold text-gtext text-sm mb-2">Fintech API Integration for European Startup</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed mb-3">Built a multi-provider payment API layer handling 50k+ daily transactions across 3 European banking partners.</p>
+                <a href="#" class="font-mono text-[12px] text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
+                  View details <span class="text-gaccent">-&gt;</span>
                 </a>
-                <div class="mt-4 pt-3 border-t border-gborder flex justify-between items-center">
-                  <span class="font-mono text-[10px] text-green-500">// completed</span>
+                <div class="mt-3 pt-3 border-t border-[#30363d] flex justify-between items-center">
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// completed</span>
                   <span class="font-mono text-[10px] text-gtext3">2025</span>
                 </div>
               </div>
-
-              <!-- Project 2 -->
-              <div class="project-card border border-gborder rounded-xl p-5 md:p-6 bg-gsurface">
+              <!-- P2 -->
+              <div class="project-card border border-[#30363d] rounded-lg p-5 bg-gsurface">
                 <div class="flex flex-wrap gap-1.5 mb-3">
                   <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Cloud</span>
                   <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">DevOps</span>
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">E-commerce</span>
                 </div>
-                <h3 class="font-mono font-semibold text-gtext text-sm md:text-base mb-2">Cloud Migration and DevOps for E-commerce Platform</h3>
-                <p class="text-gtext2 text-xs md:text-sm leading-relaxed mb-4">Migrated 12 microservices from legacy hosting to AWS ECS with automated CI/CD, cutting deploy time by 80%.</p>
-                <a href="#" class="font-mono text-xs text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
-                  View case study
-                  <span class="text-gaccent">-&gt;</span>
+                <h3 class="font-mono font-semibold text-gtext text-sm mb-2">Cloud Migration &amp; DevOps for E-commerce Platform</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed mb-3">Migrated 12 microservices from legacy hosting to AWS ECS with automated CI/CD, cutting deploy time by 80%.</p>
+                <a href="#" class="font-mono text-[12px] text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
+                  View details <span class="text-gaccent">-&gt;</span>
                 </a>
-                <div class="mt-4 pt-3 border-t border-gborder flex justify-between items-center">
-                  <span class="font-mono text-[10px] text-green-500">// completed</span>
+                <div class="mt-3 pt-3 border-t border-[#30363d] flex justify-between items-center">
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// completed</span>
                   <span class="font-mono text-[10px] text-gtext3">2025</span>
                 </div>
               </div>
-
-              <!-- Project 3 -->
-              <div class="project-card border border-gborder rounded-xl p-5 md:p-6 bg-gsurface">
+              <!-- P3 -->
+              <div class="project-card border border-[#30363d] rounded-lg p-5 bg-gsurface">
                 <div class="flex flex-wrap gap-1.5 mb-3">
                   <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">ERP</span>
                   <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Logistics</span>
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Custom</span>
                 </div>
-                <h3 class="font-mono font-semibold text-gtext text-sm md:text-base mb-2">Custom ERP System for Logistics Provider</h3>
-                <p class="text-gtext2 text-xs md:text-sm leading-relaxed mb-4">Designed and built a full-stack ERP with inventory tracking, order management, and real-time reporting dashboards.</p>
-                <a href="#" class="font-mono text-xs text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
-                  View case study
-                  <span class="text-gaccent">-&gt;</span>
+                <h3 class="font-mono font-semibold text-gtext text-sm mb-2">Custom ERP System for Logistics Provider</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed mb-3">Designed and built a full-stack ERP with inventory tracking, order management, and real-time reporting dashboards.</p>
+                <a href="#" class="font-mono text-[12px] text-gcyan hover:text-gaccent transition-colors inline-flex items-center gap-1">
+                  View details <span class="text-gaccent">-&gt;</span>
                 </a>
-                <div class="mt-4 pt-3 border-t border-gborder flex justify-between items-center">
-                  <span class="font-mono text-[10px] text-green-500">// completed</span>
+                <div class="mt-3 pt-3 border-t border-[#30363d] flex justify-between items-center">
+                  <span class="font-mono text-[10px]" style="color:#3fb950">// completed</span>
                   <span class="font-mono text-[10px] text-gtext3">2024</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="section-sep"></div>
+
+          <!-- ====== CASE STUDIES ====== -->
+          <section id="case-studies" class="reveal">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="font-mono text-[11px] text-gtext3">$ cat case-studies/</span>
+              <span class="text-gtext3/50 text-xs">|</span>
+              <span class="font-mono text-[11px] text-gtext3">// Deep Dives</span>
+            </div>
+            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-7 tracking-tight">Case Studies</h2>
+
+            <div class="space-y-3 md:space-y-4">
+
+              <!-- CS1 -->
+              <div class="case-item border border-[#30363d] rounded-lg overflow-hidden">
+                <div class="case-toggle flex items-center justify-between p-4 md:p-5 hover:bg-[#1c2128] transition-colors" onclick="toggleCase(1)">
+                  <div class="flex items-center gap-3 flex-1 min-w-0">
+                    <span class="font-mono text-[11px] text-gtext3 flex-shrink-0">[cs-01]</span>
+                    <h3 class="font-mono font-semibold text-sm md:text-base text-gtext truncate">AI-Powered Fraud Detection System</h3>
+                  </div>
+                  <div class="flex items-center gap-3 flex-shrink-0">
+                    <span class="hidden sm:inline-block font-mono text-[10px] text-gtext3">European Fintech</span>
+                    <svg class="case-chevron w-4 h-4 text-gtext2" data-case="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="case-body" id="caseBody1">
+                  <div class="px-4 md:px-5 pb-5 md:pb-6 border-t border-[#30363d] pt-4 space-y-4">
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Challenge</p>
+                      <p class="text-[13px] text-gtext2 leading-relaxed">A European fintech startup processing over 200K daily transactions needed real-time fraud detection without adding latency. Existing rule-based systems missed 30% of sophisticated fraud patterns, leading to increasing chargeback costs and customer friction.</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Solution</p>
+                      <p class="text-[13px] text-gtext2 leading-relaxed">We designed a hybrid AI pipeline combining real-time LLM-based transaction analysis with gradient-boosted anomaly detection models. The LLM evaluates transaction context, user behavior patterns, and cross-session signals in under 50ms per request. A lightweight ensemble model handles high-throughput scoring, with escalation to the LLM only for ambiguous cases.</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Technologies</p>
+                      <div class="flex flex-wrap gap-1.5">
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">LLM Fine-tuning</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">XGBoost</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Kafka Streams</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Redis</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">AWS Lambda</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">PostgreSQL</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Results</p>
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">98.7%</p>
+                          <p class="text-gtext2 text-[10px]">Detection rate</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">52ms</p>
+                          <p class="text-gtext2 text-[10px]">Avg latency</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">72%</p>
+                          <p class="text-gtext2 text-[10px]">Fewer false positives</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">&euro;2.1M</p>
+                          <p class="text-gtext2 text-[10px]">Annual savings</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CS2 -->
+              <div class="case-item border border-[#30363d] rounded-lg overflow-hidden">
+                <div class="case-toggle flex items-center justify-between p-4 md:p-5 hover:bg-[#1c2128] transition-colors" onclick="toggleCase(2)">
+                  <div class="flex items-center gap-3 flex-1 min-w-0">
+                    <span class="font-mono text-[11px] text-gtext3 flex-shrink-0">[cs-02]</span>
+                    <h3 class="font-mono font-semibold text-sm md:text-base text-gtext truncate">Autonomous Inventory &amp; Demand Forecasting Platform</h3>
+                  </div>
+                  <div class="flex items-center gap-3 flex-shrink-0">
+                    <span class="hidden sm:inline-block font-mono text-[10px] text-gtext3">SEA E-commerce</span>
+                    <svg class="case-chevron w-4 h-4 text-gtext2" data-case="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="case-body" id="caseBody2">
+                  <div class="px-4 md:px-5 pb-5 md:pb-6 border-t border-[#30363d] pt-4 space-y-4">
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Challenge</p>
+                      <p class="text-[13px] text-gtext2 leading-relaxed">A fast-growing Southeast Asian e-commerce platform with 50K+ SKUs struggled with chronic stockouts and overstock across 12 warehouses. Manual demand forecasting was inaccurate, and seasonal spikes caused inventory imbalances that cost millions in lost revenue and storage fees.</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Solution</p>
+                      <p class="text-[13px] text-gtext2 leading-relaxed">We deployed a computer vision system that continuously monitors warehouse shelf levels via existing CCTV feeds, combined with a transformer-based demand forecasting model trained on 3 years of sales data, weather patterns, and local event calendars. The system autonomously generates replenishment orders and allocates stock across warehouses based on predicted regional demand.</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Technologies</p>
+                      <div class="flex flex-wrap gap-1.5">
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Computer Vision</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Transformers</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">YOLOv8</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">PyTorch</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Apache Spark</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">GCP Pub/Sub</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Results</p>
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">94%</p>
+                          <p class="text-gtext2 text-[10px]">Forecast accuracy</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">67%</p>
+                          <p class="text-gtext2 text-[10px]">Stockout reduction</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">42%</p>
+                          <p class="text-gtext2 text-[10px]">Lower holding costs</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">$3.8M</p>
+                          <p class="text-gtext2 text-[10px]">Revenue recovered</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CS3 -->
+              <div class="case-item border border-[#30363d] rounded-lg overflow-hidden">
+                <div class="case-toggle flex items-center justify-between p-4 md:p-5 hover:bg-[#1c2128] transition-colors" onclick="toggleCase(3)">
+                  <div class="flex items-center gap-3 flex-1 min-w-0">
+                    <span class="font-mono text-[11px] text-gtext3 flex-shrink-0">[cs-03]</span>
+                    <h3 class="font-mono font-semibold text-sm md:text-base text-gtext truncate">Intelligent Document Processing &amp; Workflow Automation</h3>
+                  </div>
+                  <div class="flex items-center gap-3 flex-shrink-0">
+                    <span class="hidden sm:inline-block font-mono text-[10px] text-gtext3">Logistics</span>
+                    <svg class="case-chevron w-4 h-4 text-gtext2" data-case="3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="case-body" id="caseBody3">
+                  <div class="px-4 md:px-5 pb-5 md:pb-6 border-t border-[#30363d] pt-4 space-y-4">
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Challenge</p>
+                      <p class="text-[13px] text-gtext2 leading-relaxed">A regional logistics company processed 15,000+ shipping documents daily -- invoices, bills of lading, customs forms -- mostly as PDF scans and photos. Data entry was manual, error-prone, and required a team of 40 operators. Turnaround time averaged 4.5 hours per batch, causing shipping delays at customs.</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Solution</p>
+                      <p class="text-[13px] text-gtext2 leading-relaxed">We built a multimodal AI pipeline using a vision-language model for document layout understanding, a fine-tuned OCR model for multilingual text extraction, and a RAG-based validation layer that cross-references extracted data against customs databases and historical patterns. Extracted fields are automatically routed through a no-code workflow engine that triggers approvals, generates compliance reports, and submits digital filings.</p>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Technologies</p>
+                      <div class="flex flex-wrap gap-1.5">
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Multimodal AI</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">RAG Pipeline</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Custom OCR</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">LangChain</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">Weaviate</span>
+                        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-gaccent/10 text-gaccent border border-gaccent/20">n8n Workflows</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="font-mono text-[10px] text-gtext3 mb-1.5">// Results</p>
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">96%</p>
+                          <p class="text-gtext2 text-[10px]">Auto-processing rate</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">2.3 min</p>
+                          <p class="text-gtext2 text-[10px]">Per document</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">40</p>
+                          <p class="text-gtext2 text-[10px]">Operators redeployed</p>
+                        </div>
+                        <div class="bg-[#0d1117] rounded-lg p-3 text-center border border-[#30363d]">
+                          <p class="text-gaccent font-bold text-lg">$1.2M</p>
+                          <p class="text-gtext2 text-[10px]">Annual cost savings</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -460,86 +678,72 @@
 
           <div class="section-sep"></div>
 
-          <!-- ===== CONTACT ===== -->
+          <!-- ====== CONTACT ====== -->
           <section id="contact" class="reveal">
             <div class="flex items-center gap-2 mb-3">
-              <span class="font-mono text-xs md:text-sm text-gtext3">$ cat contact.md</span>
-              <span class="text-gtext3/50 text-sm">|</span>
-              <span class="font-mono text-xs text-gtext3">// Get In Touch</span>
+              <span class="font-mono text-[11px] text-gtext3">$ cat contact.md</span>
+              <span class="text-gtext3/50 text-xs">|</span>
+              <span class="font-mono text-[11px] text-gtext3">// Get In Touch</span>
             </div>
-            <h2 class="font-mono text-xl md:text-2xl font-bold text-gtext mb-8 tracking-tight">Contact</h2>
-
+            <h2 class="text-xl md:text-[22px] font-bold text-gtext mb-7 tracking-tight">Contact</h2>
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8">
 
-              <!-- Left: Contact Details -->
+              <!-- Details -->
               <div class="lg:col-span-3 space-y-5">
                 <!-- Address -->
                 <div class="flex items-start gap-3">
                   <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                      <circle cx="12" cy="10" r="3"/>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                     </svg>
                   </div>
                   <div>
-                    <p class="font-mono text-xs text-gtext2 mb-0.5">// Address</p>
-                    <p class="text-gtext text-sm md:text-base leading-relaxed">
-                      129/5A Hoang Van Thu, Phuong Phu Nhuan<br />
-                      Thanh pho Ho Chi Minh, Viet Nam
+                    <p class="font-mono text-[11px] text-gtext2 mb-0.5">// Address</p>
+                    <p class="text-sm md:text-[15px] leading-relaxed">
+                      129/5A Hoang Van Thu, Phuong Phu Nhuan<br />Thanh pho Ho Chi Minh, Viet Nam
                     </p>
                   </div>
                 </div>
-
                 <!-- Email -->
                 <div class="flex items-start gap-3">
                   <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="4" width="20" height="16" rx="2"/>
-                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                     </svg>
                   </div>
                   <div>
-                    <p class="font-mono text-xs text-gtext2 mb-0.5">// Email</p>
-                    <a href="mailto:leanhminh5@gmail.com" class="text-gaccent hover:text-gaccent/80 font-mono text-sm md:text-base transition-colors break-all">
-                      leanhminh5@gmail.com
-                    </a>
+                    <p class="font-mono text-[11px] text-gtext2 mb-0.5">// Email</p>
+                    <a href="mailto:leanhminh5@gmail.com" class="text-gaccent hover:text-gaccent/80 font-mono text-sm md:text-base transition-colors break-all">leanhminh5@gmail.com</a>
                   </div>
                 </div>
-
                 <!-- Phone -->
                 <div class="flex items-start gap-3">
                   <div class="mt-0.5 w-8 h-8 rounded-lg bg-gaccent/10 flex items-center justify-center flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
                   </div>
                   <div>
-                    <p class="font-mono text-xs text-gtext2 mb-0.5">// Phone</p>
-                    <a href="tel:+84786599687" class="text-gtext hover:text-gaccent font-mono text-sm md:text-base transition-colors">
-                      +84 786 599 687
-                    </a>
+                    <p class="font-mono text-[11px] text-gtext2 mb-0.5">// Phone</p>
+                    <a href="tel:+84786599687" class="text-gtext hover:text-gaccent font-mono text-sm md:text-base transition-colors">+84 786 599 687</a>
                   </div>
                 </div>
-
-                <!-- Office hours note -->
                 <div class="pt-2">
-                  <p class="font-mono text-xs text-gtext3">
-                    <span class="text-gaccent">//</span> We respond within 24 hours on business days
-                  </p>
+                  <p class="font-mono text-[11px] text-gtext3"><span class="text-gaccent">//</span> We respond within 24 hours on business days</p>
                 </div>
               </div>
 
-              <!-- Right: CTA Callout -->
+              <!-- CTA Callout -->
               <div class="lg:col-span-2 bg-gaccent/[0.06] border border-dashed border-gaccent/40 rounded-xl p-5 md:p-7 flex flex-col justify-center">
-                <p class="font-mono text-xs text-gtext3 mb-2">[call-to-action]</p>
-                <h3 class="font-mono font-semibold text-lg text-gtext mb-2">Ready to build something?</h3>
-                <p class="text-gtext2 text-sm leading-relaxed mb-5">
+                <p class="font-mono text-[11px] text-gtext3 mb-2">[call-to-action]</p>
+                <h3 class="font-mono font-semibold text-base md:text-lg mb-2">Ready to build something?</h3>
+                <p class="text-gtext2 text-[13px] leading-relaxed mb-5">
                   We are actively taking on new clients. Send us a message and we will get back to you within one business day.
                 </p>
                 <a href="mailto:leanhminh5@gmail.com" class="font-mono font-semibold text-sm bg-gaccent text-gbg rounded-lg px-5 py-3 cta-btn inline-block text-center">
                   leanhminh5@gmail.com
                 </a>
-                <p class="font-mono text-xs text-gtext3 mt-3 text-center">
+                <p class="font-mono text-[11px] text-gtext3 mt-3 text-center">
                   or call <a href="tel:+84786599687" class="text-gaccent hover:text-gaccent/80">+84 786 599 687</a>
                 </p>
               </div>
@@ -547,139 +751,150 @@
             </div>
           </section>
 
-        </div><!-- /terminal body -->
-      </div><!-- /terminal window -->
+        </div><!-- /window inner -->
+      </div><!-- /window frame -->
     </div><!-- /container -->
 
   </main>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="border-t border-gborder bg-gsurface mt-8 md:mt-12">
+  <!-- ====== FOOTER ====== -->
+  <footer class="border-t border-[#30363d] bg-[#161b22] mt-8">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 text-center">
       <p class="font-mono text-sm text-gaccent mb-2">[exit 0]</p>
-      <p class="font-mono text-xs text-gtext3">
-        &copy; 2026 LE MINH. All rights reserved.
-      </p>
+      <p class="font-mono text-[12px] text-gtext3">&copy; 2026 LE MINH. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
-    (function() {
-      'use strict';
+  (function() {
+    'use strict';
 
-      // --- Typing Effect ---
-      const line1Text = 'Initializing LE MINH Services...';
-      const line2Text = 'Specialized in Software Architecture, API Integration, and Cloud Infrastructure.';
-      const line1El = document.getElementById('line1text');
-      const line2El = document.getElementById('line2text');
-      const cursorLine = document.getElementById('cursorLine');
-      const ctaContainer = document.getElementById('ctaContainer');
+    // --- Menu bar clock ---
+    function updateClock() {
+      var now = new Date();
+      var h = String(now.getHours()).padStart(2, '0');
+      var m = String(now.getMinutes()).padStart(2, '0');
+      var el = document.getElementById('menubarClock');
+      if (el) el.textContent = h + ':' + m;
+    }
+    updateClock();
+    setInterval(updateClock, 30000);
 
-      let idx1 = 0;
-      let idx2 = 0;
-      let phase = 'line1'; // 'line1' | 'pause' | 'line2' | 'done'
+    // --- Typing effect ---
+    var line1Text = 'Initializing LE MINH Services...';
+    var line2Text = 'Specialized in Software Architecture, API Integration, and Cloud Infrastructure.';
+    var line1El = document.getElementById('line1text');
+    var line2El = document.getElementById('line2text');
+    var cursorLine = document.getElementById('cursorLine');
+    var ctaContainer = document.getElementById('ctaContainer');
 
-      function typeLine1() {
-        if (idx1 < line1Text.length) {
-          line1El.textContent += line1Text[idx1];
-          idx1++;
-          setTimeout(typeLine1, 50);
-        } else {
-          phase = 'pause';
-          setTimeout(typeLine2, 600);
-        }
+    var idx1 = 0, idx2 = 0;
+
+    function typeLine1() {
+      if (idx1 < line1Text.length) {
+        line1El.textContent += line1Text[idx1];
+        idx1++;
+        setTimeout(typeLine1, 50);
+      } else {
+        setTimeout(typeLine2, 600);
       }
+    }
 
-      function typeLine2() {
-        phase = 'line2';
-        if (idx2 < line2Text.length) {
-          line2El.textContent += line2Text[idx2];
-          idx2++;
-          setTimeout(typeLine2, 35);
-        } else {
-          phase = 'done';
-          cursorLine.classList.remove('hidden');
-          ctaContainer.classList.remove('opacity-0');
-          ctaContainer.classList.add('animate-fade-in');
-        }
+    function typeLine2() {
+      if (idx2 < line2Text.length) {
+        line2El.textContent += line2Text[idx2];
+        idx2++;
+        setTimeout(typeLine2, 35);
+      } else {
+        cursorLine.classList.remove('hidden');
+        ctaContainer.classList.remove('opacity-0');
+        ctaContainer.classList.add('animate-fade-in');
       }
+    }
 
-      // Start typing after a short delay
-      setTimeout(typeLine1, 400);
+    setTimeout(typeLine1, 400);
 
-      // --- Mobile Menu ---
-      const menuBtn = document.getElementById('menuBtn');
-      const closeMenuBtn = document.getElementById('closeMenuBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    // --- Mobile menu ---
+    var menuBtn = document.getElementById('menuBtn');
+    var closeMenuBtn = document.getElementById('closeMenuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-      function openMenu() {
-        mobileMenu.classList.remove('closed');
-        mobileMenu.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
+    function openMenu() {
+      mobileMenu.classList.remove('closed');
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      mobileMenu.classList.add('closed');
+      document.body.style.overflow = '';
+    }
+    menuBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    mobileNavLinks.forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
 
-      function closeMenu() {
-        mobileMenu.classList.remove('open');
-        mobileMenu.classList.add('closed');
-        document.body.style.overflow = '';
-      }
+    // --- Case study accordion ---
+    window.toggleCase = function(id) {
+      var body = document.getElementById('caseBody' + id);
+      var chevron = document.querySelector('.case-chevron[data-case="' + id + '"]');
+      var isOpen = body.classList.contains('open');
 
-      menuBtn.addEventListener('click', openMenu);
-      closeMenuBtn.addEventListener('click', closeMenu);
-      mobileNavLinks.forEach(function(link) {
-        link.addEventListener('click', closeMenu);
+      // Close all
+      document.querySelectorAll('.case-body').forEach(function(b) {
+        b.classList.remove('open');
+      });
+      document.querySelectorAll('.case-chevron').forEach(function(c) {
+        c.classList.remove('open');
       });
 
-      // --- Scroll Reveal (IntersectionObserver) ---
-      const revealEls = document.querySelectorAll('.reveal');
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, {
-          threshold: 0.1,
-          rootMargin: '0px 0px -40px 0px'
-        });
-
-        revealEls.forEach(function(el) {
-          observer.observe(el);
-        });
-      } else {
-        // Fallback: show all
-        revealEls.forEach(function(el) {
-          el.classList.add('visible');
-        });
+      // Toggle this one
+      if (!isOpen) {
+        body.classList.add('open');
+        if (chevron) chevron.classList.add('open');
       }
+    };
 
-      // --- Navbar active state on scroll ---
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.nav-underline');
-
-      function updateActiveLink() {
-        let current = '';
-        sections.forEach(function(section) {
-          const top = section.getBoundingClientRect().top;
-          if (top <= 150) {
-            current = section.getAttribute('id');
+    // --- Scroll reveal ---
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
           }
         });
-        navLinks.forEach(function(link) {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + current) {
-            link.classList.add('active');
-          }
-        });
-      }
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(function(el) { observer.observe(el); });
+    } else {
+      revealEls.forEach(function(el) { el.classList.add('visible'); });
+    }
 
-      window.addEventListener('scroll', updateActiveLink);
+    // --- Nav scroll spy ---
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-underline');
+    window.addEventListener('scroll', function() {
+      var current = '';
+      sections.forEach(function(s) {
+        if (s.getBoundingClientRect().top <= 150) current = s.getAttribute('id');
+      });
+    });
 
-    })();
+  })();
   </script>
+
+  <!-- Tailwind animation keyframe fix -->
+  <style>
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+  </style>
 </body>
 </html>
