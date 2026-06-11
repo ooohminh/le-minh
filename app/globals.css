@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* ===== Theme System (CSS Custom Properties) ===== */
+
+:root {
+  --color-bg-base: #0d1117;
+  --color-bg-surface: #1a1f2a;
+  --color-bg-hover: #212837;
+  --color-bg-menubar: #1a1f2a;
+  --color-text-primary: #c5c8c6;
+  --color-text-secondary: #6e738d;
+  --color-text-tertiary: #5c5f64;
+  --color-accent: #9ece6a;
+  --color-accent-secondary: #7dcfff;
+  --color-accent-glow: rgba(158, 206, 106, 0.07);
+  --color-border: #252b38;
+  --color-success: #9ece6a;
+  --color-danger: #f85149;
+  --color-traffic-red: #ff5f57;
+  --color-traffic-yellow: #ffbd2e;
+  --color-traffic-green: #27c93f;
+}
+
+[data-theme="catppuccin-mocha"] {
+  --color-bg-base: #11111b;
+  --color-bg-surface: #1e1e2e;
+  --color-bg-hover: #252536;
+  --color-bg-menubar: #181825;
+  --color-text-primary: #cdd6f4;
+  --color-text-secondary: #a6adc8;
+  --color-text-tertiary: #6c7086;
+  --color-accent: #cba6f7;
+  --color-accent-secondary: #89b4fa;
+  --color-accent-glow: rgba(203, 166, 247, 0.07);
+  --color-border: #313244;
+  --color-success: #a6e3a1;
+  --color-danger: #f38ba8;
+}
+
+[data-theme="catppuccin-macchiato"] {
+  --color-bg-base: #181926;
+  --color-bg-surface: #24273a;
+  --color-bg-hover: #2c3047;
+  --color-bg-menubar: #1e2030;
+  --color-text-primary: #cad3f5;
+  --color-text-secondary: #a5adcb;
+  --color-text-tertiary: #6e738d;
+  --color-accent: #c6a0f6;
+  --color-accent-secondary: #8aadf4;
+  --color-accent-glow: rgba(198, 160, 246, 0.07);
+  --color-border: #363a4f;
+  --color-success: #a6da95;
+  --color-danger: #ed8796;
+}
+
+[data-theme="github-dark"] {
+  --color-bg-base: #0d1117;
+  --color-bg-surface: #161b22;
+  --color-bg-hover: #1c2128;
+  --color-bg-menubar: #21262d;
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-tertiary: #484f58;
+  --color-accent: #58a6ff;
+  --color-accent-secondary: #3fb950;
+  --color-accent-glow: rgba(88, 166, 255, 0.07);
+  --color-border: #30363d;
+  --color-success: #3fb950;
+  --color-danger: #f85149;
+}
+
+[data-theme="tokyo-night"] {
+  --color-bg-base: #0f111a;
+  --color-bg-surface: #1a1b26;
+  --color-bg-hover: #222438;
+  --color-bg-menubar: #1a1b26;
+  --color-text-primary: #a9b1d6;
+  --color-text-secondary: #787c99;
+  --color-text-tertiary: #565f89;
+  --color-accent: #7aa2f7;
+  --color-accent-secondary: #bb9af7;
+  --color-accent-glow: rgba(122, 162, 247, 0.07);
+  --color-border: #32344a;
+  --color-success: #9ece6a;
+  --color-danger: #f7768e;
+}
+
+[data-theme] {
+  --color-traffic-red: #ff5f57;
+  --color-traffic-yellow: #ffbd2e;
+  --color-traffic-green: #27c93f;
+}
+
+/* ===== Tailwind v4 Theme Extension ===== */
+@theme {
+  --font-mono: 'SF Mono', 'JetBrains Mono', Menlo, Monaco, monospace;
+}
+
+/* ===== Base Styles ===== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'SF Mono', 'JetBrains Mono', Menlo, Monaco, monospace;
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Background noise */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
+  transition: none;
+}
+
+/* Gradient overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 15%, var(--color-accent-glow) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ===== Utility Classes ===== */
+.transition-theme {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.traffic-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.section-sep {
+  height: 1px;
+  background: var(--color-border);
+  margin: 2.5rem 0;
+}
+
+@media (max-width: 767px) {
+  .section-sep {
+    margin: 2rem 0;
+  }
+}
+
+/* Cursor blink */
+.cursor-blink::after {
+  content: '_';
+  color: var(--color-accent);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: deploy to github pages
 
 on:
   push:
@@ -15,20 +15,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: install
+        run: npm ci
+      - name: build
+        run: npm run build
+      - name: setup pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
+        with:
+          static_site_generator: next
+      - name: upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
-      - name: Deploy to GitHub Pages
+          path: ./out
+      - name: deploy
         id: deployment
         uses: actions/deploy-pages@v4
