@@ -1,48 +1,36 @@
-# LE MINH - Syntax Highlighting & Theme System Update
+# LE MINH - Darker Ayu Dark Background & Button Update
 
-## Font Settings
-- Primary: SF Mono, fallback JetBrains Mono
-- Base size: 13px for terminal/monospace text
-- Font weight: 500
-- Line height: 1.35
+## Background Changes (Ayu Dark)
 
-## CSS Custom Properties (new)
+| Token | Old | New |
+|---|---|---|
+| --color-bg-base (page) | #0d1117 | **#0b0e14** |
+| --color-bg-surface (window) | #1a1f2a | **#0f1419** |
+| --color-bg-hover | #212837 | **#161c24** |
+| --color-bg-menubar | #1a1f2a | **#0f1419** |
+| --color-border | #252b38 | **#1a2029** |
 
-Each theme now has syntax-specific color variables:
+## Button Colors
 
-| Variable | Ayu Dark | Catppuccin Mocha | Catppuccin Macchiato | GitHub Dark | Tokyo Night |
-|---|---|---|---|---|---|
-| --color-prompt | #9ece6a | #a6e3a1 | #a6da95 | #3fb950 | #9ece6a |
-| --color-text-primary | #c5c8c6 | #cdd6f4 | #cad3f5 | #c9d1d9 | #a9b1d6 |
-| --color-accent | #9ece6a | #cba6f7 | #c6a0f6 | #58a6ff | #7aa2f7 |
-| --color-string | #bb9af7 | #f5c2e7 | #f5bde6 | #a5d6ff | #bb9af7 |
-| --color-comment | #6e738d | #6c7086 | #6e738d | #8b949e | #565f89 |
-| --color-variable | #7dcfff | #89b4fa | #8aadf4 | #79c0ff | #73daca |
-| --color-number | #e0af68 | #fab387 | #f5a97f | #ffa657 | #e0af68 |
+| State | Property | Value |
+|---|---|---|
+| Default | Background | #9ece6a |
+| Default | Text | #0b0e14 |
+| Hover | Background | #b7e38a (brighter green) |
+| Hover | Transform | scale(1.03) |
 
-## Syntax Mapping
+Other themes get their own --color-accent-hover values.
 
-| Element | Variable |
-|---|---|
-| `$` prompt symbol | --color-prompt |
-| Command names (cat, ls) | --color-accent |
-| Arguments/paths | --color-variable |
-| `\|` separator | --color-comment |
-| `//` comments | --color-comment |
-| Section titles | --color-accent |
-| Service descriptions | --color-string |
-| Case study body text | --color-string |
-| Metric values | --color-number |
-| Metric labels | --color-comment |
-| [service-N] labels | --color-comment |
-| Technologies tags | --color-accent |
+## Hero Text
+
+Both typing lines fully lowercase to match terminal aesthetic:
+
+- `$ initializing le minh services...`
+- `$ specialized in software architecture, api integration, and cloud infrastructure.`
 
 ## Files to Update
 
-1. `app/globals.css` - Add --color-prompt, --color-string, --color-variable, --color-number to all 5 themes; update body font (13px, 500, 1.35)
-2. `components/hero-section.tsx` - Use --color-prompt for `$`
-3. `components/section-header.tsx` - Use --color-prompt for `$`, --color-variable for args, --color-comment for `|` and comment
-4. `components/service-card.tsx` - Use --color-string for description text
-5. `components/case-study-card.tsx` - Use --color-string for body, --color-number for metrics
-6. `components/case-studies-section.tsx` - Update metric values to use --color-number
-7. `components/contact-section.tsx` - Use --color-string for descriptions
+1. `app/globals.css` - Darker bg colors, add --color-accent-hover for all 5 themes, update cta-btn class
+2. `components/hero-section.tsx` - Lowercase hero text, remove inline CTA bg/color
+3. `components/macos-menu-bar.tsx` - Remove inline CTA bg/color
+4. `components/contact-section.tsx` - Remove inline CTA bg/color

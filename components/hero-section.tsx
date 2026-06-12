@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const LINE1 = "Initializing LE MINH Services...";
+const LINE1 = "initializing le minh services...";
 const LINE2 =
-  "Specialized in Software Architecture, API Integration, and Cloud Infrastructure.";
+  "specialized in software architecture, api integration, and cloud infrastructure.";
 
 export default function HeroSection() {
   const [phase, setPhase] = useState<"line1" | "pause" | "line2" | "done">(
@@ -103,10 +103,6 @@ export default function HeroSection() {
             <a
               href="#services"
               className="inline-block font-semibold text-sm rounded-lg px-6 py-3 md:px-8 md:py-3.5 cta-btn"
-              style={{
-                background: "var(--color-accent)",
-                color: "var(--color-bg-base)",
-              }}
             >
               explore our services
             </a>

@@ -115,11 +115,7 @@ export default function MacOSMenuBar() {
             <a
               href="#contact"
               onClick={() => setMobileOpen(false)}
-              className="text-sm font-bold rounded-lg px-6 py-3"
-              style={{
-                background: "var(--color-accent)",
-                color: "var(--color-bg-base)",
-              }}
+              className="text-sm font-bold rounded-lg px-6 py-3 cta-btn"
             >
               hire us
             </a>

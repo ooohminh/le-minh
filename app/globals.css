@@ -3,16 +3,17 @@
 /* ===== Theme System (CSS Custom Properties) ===== */
 
 :root {
-  --color-bg-base: #0d1117;
-  --color-bg-surface: #1a1f2a;
-  --color-bg-hover: #212837;
-  --color-bg-menubar: #1a1f2a;
+  --color-bg-base: #0b0e14;
+  --color-bg-surface: #0f1419;
+  --color-bg-hover: #161c24;
+  --color-bg-menubar: #0f1419;
   --color-text-primary: #c5c8c6;
   --color-text-secondary: #6e738d;
   --color-text-tertiary: #5c5f64;
   --color-accent: #9ece6a;
+  --color-accent-hover: #b7e38a;
   --color-accent-glow: rgba(158, 206, 106, 0.07);
-  --color-border: #252b38;
+  --color-border: #1a2029;
   --color-success: #9ece6a;
   --color-danger: #f85149;
   --color-traffic-red: #ff5f57;
@@ -35,6 +36,7 @@
   --color-text-secondary: #a6adc8;
   --color-text-tertiary: #6c7086;
   --color-accent: #cba6f7;
+  --color-accent-hover: #dbbdf9;
   --color-accent-glow: rgba(203, 166, 247, 0.07);
   --color-border: #313244;
   --color-success: #a6e3a1;
@@ -55,6 +57,7 @@
   --color-text-secondary: #a5adcb;
   --color-text-tertiary: #6e738d;
   --color-accent: #c6a0f6;
+  --color-accent-hover: #d6b8f8;
   --color-accent-glow: rgba(198, 160, 246, 0.07);
   --color-border: #363a4f;
   --color-success: #a6da95;
@@ -75,6 +78,7 @@
   --color-text-secondary: #8b949e;
   --color-text-tertiary: #484f58;
   --color-accent: #58a6ff;
+  --color-accent-hover: #79b8ff;
   --color-accent-glow: rgba(88, 166, 255, 0.07);
   --color-border: #30363d;
   --color-success: #3fb950;
@@ -95,6 +99,7 @@
   --color-text-secondary: #787c99;
   --color-text-tertiary: #565f89;
   --color-accent: #7aa2f7;
+  --color-accent-hover: #9bb9f9;
   --color-accent-glow: rgba(122, 162, 247, 0.07);
   --color-border: #32344a;
   --color-success: #9ece6a;
@@ -168,6 +173,16 @@ body::after {
 }
 
 /* ===== Utility Classes ===== */
+.cta-btn {
+  background: var(--color-accent);
+  color: var(--color-bg-base);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.cta-btn:hover {
+  transform: scale(1.03);
+  background: var(--color-accent-hover);
+}
+
 .transition-theme {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }

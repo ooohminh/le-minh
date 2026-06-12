@@ -134,10 +134,6 @@ export default function ContactSection() {
           <a
             href="mailto:leanhminh5@gmail.com"
             className="font-semibold text-sm rounded-lg px-5 py-3 text-center cta-btn"
-            style={{
-              background: "var(--color-accent)",
-              color: "var(--color-bg-base)",
-            }}
           >
             leanhminh5@gmail.com
           </a>
