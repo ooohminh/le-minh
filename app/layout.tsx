@@ -1,56 +1,38 @@
 import type { Metadata } from "next";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./providers/theme-provider";
-import MacOSMenuBar from "@/components/macos-menu-bar";
-import Footer from "@/components/footer";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz", "SOFT"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "le minh - boutique it consultancy",
+  title: "le minh - software consultancy",
   description:
-    "le minh is a registered IT service firm based in Ho Chi Minh City, providing high-end technical solutions for global clients.",
-};
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "LE MINH",
-  description:
-    "Boutique IT consultancy specializing in software architecture, API integration, and cloud infrastructure.",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "129/5A Hoang Van Thu, Phuong Phu Nhuan",
-    addressLocality: "Ho Chi Minh City",
-    addressCountry: "VN",
+    "a boutique software consultancy based in vietnam. we take on a small number of engagements at a time, giving each project the full weight of our expertise.",
+  openGraph: {
+    title: "le minh - software consultancy",
+    description:
+      "a boutique software consultancy based in vietnam. architecture, systems design, and engineering excellence.",
+    type: "website",
   },
-  email: "leminh5@gmail.com",
-  telephone: "+84 786 599 687",
-  url: "https://ooohminh.github.io/le-minh/",
 };
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-theme="ayu-dark" suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
-      <body>
-        <ThemeProvider>
-          <MacOSMenuBar />
-          <main className="pt-12 md:pt-16 pb-10">
-            <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6">
-              {children}
-            </div>
-          </main>
-          <Footer />
-        </ThemeProvider>
-      </body>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
