@@ -6,9 +6,8 @@ export default function Closing() {
   return (
     <section
       id="contact"
-      className="relative py-40 md:py-64 overflow-hidden"
+      className="relative overflow-hidden py-40 md:py-64"
     >
-      {/* gradient glow */}
       <div
         className="glow glow-champagne animate-drift"
         style={{
@@ -26,7 +25,7 @@ export default function Closing() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="label mb-8">get in touch</div>
+          <div className="label mb-8">availability</div>
 
           <h2
             className="font-serif font-light text-balance"
@@ -45,17 +44,17 @@ export default function Closing() {
             className="mt-8 max-w-md mx-auto"
             style={{ color: "var(--color-stone)" }}
           >
-            we take on a limited number of projects each year. if you have a
-            challenge worth solving, we'd like to hear about it.
+            we take on a limited number of projects each year, with a preference
+            for ambitious systems and long-lived product work.
           </p>
 
           <div className="mt-12">
             <a
-              href="mailto:hello@le-minh.io"
+              href="#services"
               className="magnetic-btn"
               data-cursor
             >
-              start a conversation
+              review services
               <svg
                 width="14"
                 height="14"

@@ -6,33 +6,33 @@ import { useState } from "react";
 const services = [
   {
     num: "01",
-    title: "custom software development",
-    desc: "bespoke web, mobile, and enterprise applications tailored to your unique business needs.",
+    title: "product engineering",
+    desc: "bespoke web, mobile, and internal platforms shaped around real operating constraints.",
   },
   {
     num: "02",
-    title: "software architecture & technical consulting",
-    desc: "expert guidance on system design, scalability, and technology strategy.",
+    title: "architecture advisory",
+    desc: "system design, scalability decisions, and technical strategy for teams approaching consequential build moments.",
   },
   {
     num: "03",
-    title: "api development & system integration",
-    desc: "robust, secure apis and seamless integration between platforms and third-party services.",
+    title: "api and integration systems",
+    desc: "robust interfaces, secure data movement, and clean integration between fragmented platforms.",
   },
   {
     num: "04",
-    title: "cloud infrastructure & devops",
-    desc: "cloud migration, infrastructure automation, ci/cd pipelines, and scalable deployments.",
+    title: "cloud and delivery infrastructure",
+    desc: "migration, automation, ci/cd, and deployment foundations that keep teams moving calmly.",
   },
   {
     num: "05",
-    title: "ai/ml solutions & automation",
-    desc: "intelligent features, workflow automation, and data-driven enhancements.",
+    title: "ai workflow systems",
+    desc: "practical automation, intelligent interfaces, and data workflows built into existing operations.",
   },
   {
     num: "06",
-    title: "ongoing support & maintenance",
-    desc: "long-term managed services, security monitoring, performance optimization, and iterative improvements.",
+    title: "continuity and optimization",
+    desc: "long-term stewardship, performance tuning, security posture, and deliberate iteration.",
   },
 ];
 
@@ -40,17 +40,31 @@ export default function Services() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section id="services" className="relative py-32 md:py-48">
+    <section id="services" className="section-shell">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="label mb-16"
-        >
-          what we do
-        </motion.div>
+        <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="label md:col-span-4"
+          >
+            what we do
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl text-balance md:col-span-8"
+            style={{ color: "var(--color-stone)" }}
+          >
+            senior technical judgment for the moments where code quality,
+            system design, and delivery culture start to matter at the same
+            time.
+          </motion.p>
+        </div>
 
         <div className="divider-line" />
 
@@ -70,11 +84,11 @@ export default function Services() {
               onMouseLeave={() => setHovered(null)}
             >
               <div
-                className="grid grid-cols-12 gap-4 md:gap-8 py-8 md:py-10 transition-colors duration-500"
+                className="grid grid-cols-12 gap-4 px-0 py-8 transition-colors duration-500 md:gap-8 md:py-10"
                 style={{
                   background:
                     hovered === i
-                      ? "rgba(191, 161, 112, 0.02)"
+                      ? "linear-gradient(90deg, rgba(191, 161, 112, 0.055), transparent)"
                       : "transparent",
                 }}
               >

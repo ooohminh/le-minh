@@ -32,10 +32,11 @@ export default function Nav() {
           style={{
             backdropFilter: scrolled ? "blur(20px)" : "none",
             WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-            background: scrolled ? "rgba(10, 10, 12, 0.7)" : "transparent",
+            background: scrolled ? "rgba(5, 5, 6, 0.72)" : "transparent",
             borderBottom: scrolled
-              ? "1px solid rgba(26, 26, 30, 0.8)"
+              ? "1px solid rgba(237, 234, 227, 0.08)"
               : "1px solid transparent",
+            boxShadow: scrolled ? "0 18px 60px rgba(0, 0, 0, 0.22)" : "none",
           }}
         >
           <div className="mx-auto max-w-7xl px-6 md:px-10">

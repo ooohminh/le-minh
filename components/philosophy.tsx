@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Philosophy() {
   return (
-    <section className="relative py-32 md:py-48">
+    <section className="section-shell">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
           <div className="md:col-span-3">
@@ -32,10 +32,9 @@ export default function Philosophy() {
                 color: "var(--color-bone)",
               }}
             >
-              le minh is a software consultancy based in vietnam. we take on a
-              small number of engagements at a time, giving each project the
-              full weight of our expertise in architecture, systems design, and
-              engineering excellence.
+              le minh is a software consultancy based in vietnam. we shape
+              durable systems, product infrastructure, and technical operating
+              rhythms for clients who value clarity over volume.
             </motion.p>
 
             <motion.div
@@ -46,9 +45,9 @@ export default function Philosophy() {
               className="mt-12 flex flex-wrap gap-x-12 gap-y-4"
             >
               {[
-                { num: "10+", label: "years of experience" },
-                { num: "40+", label: "projects delivered" },
-                { num: "6", label: "engagements per year" },
+                { num: "10+", label: "years shaping production systems" },
+                { num: "40+", label: "projects delivered with care" },
+                { num: "6", label: "select engagements each year" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div

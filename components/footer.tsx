@@ -31,7 +31,7 @@ export default function Footer() {
               (e.currentTarget.style.color = "var(--color-stone)")
             }
           >
-            back to top ↑
+            back to top
           </a>
         </div>
       </div>

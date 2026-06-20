@@ -4,23 +4,23 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
-    title: "fintech api integration",
-    subtitle: "for a european startup",
-    desc: "designed and built a high-throughput payment processing api handling 10k+ transactions per second with sub-50ms latency.",
+    title: "transaction layer redesign",
+    subtitle: "fintech infrastructure",
+    desc: "designed and built a high-throughput payment api with clearer fault boundaries, improved observability, and sub-50ms response targets.",
     tags: ["go", "postgresql", "kubernetes", "redis"],
     align: "left" as const,
   },
   {
-    title: "cloud migration & devops",
-    subtitle: "for an e-commerce platform",
-    desc: "migrated a monolithic php application to a microservices architecture on aws, reducing deployment time from 2 hours to 8 minutes.",
+    title: "release system transformation",
+    subtitle: "commerce operations",
+    desc: "moved a legacy monolith into a cloud delivery model, reducing deployment time from 2 hours to 8 minutes.",
     tags: ["aws", "docker", "terraform", "github actions"],
     align: "right" as const,
   },
   {
-    title: "custom erp system",
-    subtitle: "for a logistics provider",
-    desc: "built a real-time inventory and fleet management system with predictive routing, serving 500+ drivers across 3 countries.",
+    title: "operational command system",
+    subtitle: "logistics platform",
+    desc: "built real-time inventory and fleet coordination software with predictive routing across 500+ drivers in 3 countries.",
     tags: ["next.js", "python", "postgres", "mapbox"],
     align: "left" as const,
   },
@@ -28,7 +28,7 @@ const projects = [
 
 export default function SelectedWork() {
   return (
-    <section id="work" className="relative py-32 md:py-48">
+    <section id="work" className="section-shell">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,7 +40,7 @@ export default function SelectedWork() {
           selected work
         </motion.div>
 
-        <div className="space-y-32 md:space-y-48">
+        <div className="space-y-20 md:space-y-28">
           {projects.map((project, i) => (
             <motion.div
               key={i}
@@ -48,12 +48,12 @@ export default function SelectedWork() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className={`grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 ${
+              className={`glass-surface grid grid-cols-1 gap-6 p-6 md:grid-cols-12 md:gap-12 md:p-10 ${
                 project.align === "right" ? "md:text-right" : ""
               }`}
             >
               <div
-                className={`md:col-span-8 ${
+                className={`md:col-span-7 ${
                   project.align === "right" ? "md:col-start-5" : ""
                 }`}
               >
@@ -102,6 +102,22 @@ export default function SelectedWork() {
                       {tag}
                     </span>
                   ))}
+                </div>
+              </div>
+              <div
+                className={`hidden md:block md:col-span-4 ${
+                  project.align === "right" ? "md:col-start-1 md:row-start-1" : "md:col-start-9"
+                }`}
+                aria-hidden="true"
+              >
+                <div className="relative h-full min-h-56 overflow-hidden border border-[rgba(237,234,227,0.08)]">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(191,161,112,0.22),transparent_38%),linear-gradient(135deg,rgba(237,234,227,0.07),rgba(143,154,155,0.03))]" />
+                  <div className="absolute inset-x-6 top-8 h-px bg-[rgba(237,234,227,0.18)]" />
+                  <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-2">
+                    <span className="h-10 border border-[rgba(237,234,227,0.12)]" />
+                    <span className="h-10 border border-[rgba(191,161,112,0.18)]" />
+                    <span className="h-10 border border-[rgba(237,234,227,0.12)]" />
+                  </div>
                 </div>
               </div>
             </motion.div>

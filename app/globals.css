@@ -2,10 +2,12 @@
 
 @theme {
   --color-onyx: #0A0A0C;
+  --color-ink: #050506;
   --color-graphite: #111114;
   --color-smoke: #1A1A1E;
   --color-bone: #EDEAE3;
   --color-stone: #6B6B70;
+  --color-steel: #8F9A9B;
   --color-champagne: #BFA170;
   --color-champagne-light: #D4B88A;
 
@@ -27,7 +29,9 @@
   }
 
   body {
-    background: var(--color-onyx);
+    background:
+      radial-gradient(circle at 70% 8%, rgba(191, 161, 112, 0.08), transparent 28rem),
+      linear-gradient(180deg, var(--color-ink) 0%, var(--color-onyx) 36%, #08080a 100%);
     color: var(--color-bone);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
@@ -73,10 +77,16 @@
 
   .label {
     font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.14em;
     color: var(--color-stone);
     font-weight: 500;
+  }
+
+  .eyebrow {
+    color: var(--color-champagne);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
   }
 
   .grain-overlay {
@@ -100,7 +110,67 @@
   }
 
   .glow-champagne {
-    background: radial-gradient(circle, rgba(191, 161, 112, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(191, 161, 112, 0.14) 0%, transparent 70%);
+  }
+
+  .ambient-shader {
+    position: absolute;
+    inset: -12%;
+    z-index: 0;
+    opacity: 0.48;
+    filter: saturate(0.72) contrast(1.08);
+    mask-image: radial-gradient(circle at 68% 34%, black 0%, black 34%, transparent 68%);
+    pointer-events: none;
+  }
+
+  .ambient-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 72% 30%, rgba(191, 161, 112, 0.18), transparent 22rem),
+      radial-gradient(circle at 42% 52%, rgba(143, 154, 155, 0.08), transparent 20rem);
+  }
+
+  .architectural-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image:
+      linear-gradient(rgba(237, 234, 227, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237, 234, 227, 0.05) 1px, transparent 1px);
+    background-size: 96px 96px;
+    mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+  }
+
+  .glass-surface {
+    background:
+      linear-gradient(135deg, rgba(237, 234, 227, 0.075), rgba(237, 234, 227, 0.025)),
+      rgba(10, 10, 12, 0.58);
+    border: 1px solid rgba(237, 234, 227, 0.09);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 24px 80px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+  }
+
+  .hairline {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(237, 234, 227, 0.12), transparent);
+  }
+
+  .text-muted {
+    color: var(--color-stone);
+  }
+
+  .section-shell {
+    position: relative;
+    padding-block: clamp(6rem, 12vw, 12rem);
   }
 
   @keyframes drift {
@@ -161,7 +231,7 @@
 
   .divider-line {
     height: 1px;
-    background: var(--color-smoke);
+    background: linear-gradient(90deg, rgba(237, 234, 227, 0.04), rgba(237, 234, 227, 0.14), rgba(237, 234, 227, 0.04));
     width: 100%;
   }
 
@@ -173,5 +243,16 @@
 
   .word-inner {
     display: inline-block;
+  }
+
+  @media (max-width: 859px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .ambient-shader {
+      display: none;
+    }
+
+    .architectural-grid {
+      opacity: 0.16;
+      background-size: 56px 56px;
+    }
   }
 }
